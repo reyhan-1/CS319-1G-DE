@@ -7,8 +7,7 @@ Defender is a horizontally scrolling shoot 'em up, the game is set on an unnamed
  Emulated version of [Defender](https://www.retrogames.cz/play_178-DOS.php?language=EN) on DOSBox.
  
  Game size: 21 kB
-
-## Group 1A
+    
 ### Authors
 ```
  * Reyhan Uyanik
