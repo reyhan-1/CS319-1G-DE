@@ -1,4 +1,4 @@
-# CS319 1A - Defender
+# CS319 - 1A - Defender
 Defender is a horizontally scrolling shoot 'em up, the game is set on an unnamed planet where the player must defeat waves of invading aliens while protecting astronauts. It's original creater is [Eugene Jarvis](https://en.wikipedia.org/wiki/Eugene_Jarvis)
 
 ![Defender inaction](https://www.gamasutra.com/db_area/images/feature/4078/0102.png)
@@ -7,7 +7,7 @@ Defender is a horizontally scrolling shoot 'em up, the game is set on an unnamed
  Emulated version of [Defender](https://www.retrogames.cz/play_178-DOS.php?language=EN) on DOSBox.
  
  Game size: 21 kB
-    
+
 ### Authors
 ```
  * Reyhan Uyanik
