@@ -1,4 +1,4 @@
-# CS319 - 1A - Defender
+# CS319 Team Project Repository - Group G - Defender
 Defender is a horizontally scrolling shoot 'em up, the game is set on an unnamed planet where the player must defeat waves of invading aliens while protecting astronauts. Its original creator is [Eugene Jarvis](https://en.wikipedia.org/wiki/Eugene_Jarvis)
 
 ![Defender inaction](https://www.gamasutra.com/db_area/images/feature/4078/0102.png)
@@ -8,11 +8,9 @@ Defender is a horizontally scrolling shoot 'em up, the game is set on an unnamed
  
  Game size: 21 kB
 
-### Authors
+### Group Members 
 ```
  * Reyhan Uyanik
- * Umut Balkan
- * Gurkan Gur
  * Oguz Satoglu
  * Orkan Oztrak
 ```
