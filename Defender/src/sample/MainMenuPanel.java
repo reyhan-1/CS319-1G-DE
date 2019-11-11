@@ -7,6 +7,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -30,8 +31,11 @@ public class MainMenuPanel extends Pane {
         helpButton = new Button( "Help");
         highScoresButton = new Button( "High Scores");
         exitButton = new Button( "Exit");
-        titleLabel.setFont(new Font("Tahoma", 40));
-        titleLabel.setTextFill(Color.rgb(238,219,0));
+        soundSlider = new Slider(0, 100, 50);
+        Image soundImage = new Image("sample/resources/sound3.png", 50, 50, false, true);
+        ImageView soundImageView = new ImageView(soundImage);
+        GridPane soundSliderWithImage = new GridPane();
+
         playButton.setStyle( "-fx-base: rgb(238,219,0)");
         exitButton.setStyle( "-fx-base: rgb(238,219,0)");
         playButton.setMinSize( 200, 100);
@@ -40,15 +44,22 @@ public class MainMenuPanel extends Pane {
         exitButton.setMinSize( 200, 100);
         buttons.addRow(0, playButton, helpButton);
         buttons.addRow( 1, highScoresButton, exitButton);
+        buttons.setLayoutX(200);
+        buttons.setLayoutY(300);
 
+        titleLabel.setFont(new Font("Thom", 40));
+        titleLabel.setTextFill(Color.rgb(238,219,0));
         titleLabel.setPrefSize(200,100);
         titleLabel.setAlignment( Pos.CENTER);
         titleLabel.setLayoutX(300);
         titleLabel.setLayoutY(150);
-        buttons.setLayoutX(200);
-        buttons.setLayoutY(300);
-        this.getChildren().addAll( titleLabel, buttons);
-        this.setBackground(new Background(background));
 
+        soundSliderWithImage.addRow(0, soundImageView, soundSlider);
+        soundSliderWithImage.setPrefSize( 150, 50);
+        soundSliderWithImage.setLayoutX(650);
+        soundSliderWithImage.setLayoutY(0);
+
+        this.getChildren().addAll( titleLabel, buttons, soundSliderWithImage);
+        this.setBackground(new Background(background));
     }
 }
