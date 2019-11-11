@@ -1,13 +1,14 @@
-package sample;
+package GUI;
 
-import javafx.geometry.Insets;
+import GameLogic.GameEngine;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -19,12 +20,16 @@ public class MainMenuPanel extends Pane {
     private Button highScoresButton;
     private Button exitButton;
     private Slider soundSlider;
+    private ScreenManager screenManager;
 
-    public MainMenuPanel(){
-        Image backgroundImage = new Image("sample/resources/bg.png", 800, 600, false, true);
+    public MainMenuPanel(ScreenManager screenManager1){
+        screenManager = screenManager1;
+
+        Image backgroundImage = new Image("GUI/resources/bg.png", 800, 600, false, true);
         BackgroundImage background = new BackgroundImage( backgroundImage, BackgroundRepeat.REPEAT,
                 BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
         this.setMinSize(800,600);
+
         GridPane buttons = new GridPane();
         titleLabel = new Label( "Defender");
         playButton = new Button( "Play");
@@ -32,7 +37,7 @@ public class MainMenuPanel extends Pane {
         highScoresButton = new Button( "High Scores");
         exitButton = new Button( "Exit");
         soundSlider = new Slider(0, 100, 50);
-        Image soundImage = new Image("sample/resources/sound3.png", 50, 50, false, true);
+        Image soundImage = new Image("GUI/resources/sound3.png", 50, 50, false, true);
         ImageView soundImageView = new ImageView(soundImage);
         GridPane soundSliderWithImage = new GridPane();
 
@@ -61,5 +66,12 @@ public class MainMenuPanel extends Pane {
 
         this.getChildren().addAll( titleLabel, buttons, soundSliderWithImage);
         this.setBackground(new Background(background));
+
+        playButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                screenManager.viewGame();
+            }
+        });
     }
 }
