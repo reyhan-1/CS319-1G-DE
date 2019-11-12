@@ -31,18 +31,24 @@ public class MainMenuPanel extends Pane {
         this.setMinSize(800,600);
 
         GridPane buttons = new GridPane();
+        buttons.setHgap( 20);
+        buttons.setVgap( 20);
         titleLabel = new Label( "Defender");
         playButton = new Button( "Play");
         helpButton = new Button( "Help");
-        highScoresButton = new Button( "High Scores");
+        highScoresButton = new Button( "High \nScores");
         exitButton = new Button( "Exit");
         soundSlider = new Slider(0, 100, 50);
         Image soundImage = new Image("GUI/resources/sound3.png", 50, 50, false, true);
         ImageView soundImageView = new ImageView(soundImage);
         GridPane soundSliderWithImage = new GridPane();
 
-        playButton.setStyle( "-fx-base: rgb(238,219,0)");
-        exitButton.setStyle( "-fx-base: rgb(238,219,0)");
+        String buttonStyle = "-fx-base: rgb(238,219,0); -fx-background-radius: 20";
+        playButton.setStyle( buttonStyle);
+        exitButton.setStyle( buttonStyle);
+        highScoresButton.setStyle( buttonStyle);
+        helpButton.setStyle( buttonStyle);
+
         playButton.setMinSize( 200, 100);
         helpButton.setMinSize( 200, 100);
         highScoresButton.setMinSize( 200, 100);
@@ -52,11 +58,11 @@ public class MainMenuPanel extends Pane {
         buttons.setLayoutX(200);
         buttons.setLayoutY(300);
 
-        titleLabel.setFont(new Font("Thom", 40));
+        getStylesheets().add(getClass().getResource("spaceFont.css").toExternalForm());
         titleLabel.setTextFill(Color.rgb(238,219,0));
-        titleLabel.setPrefSize(200,100);
+        titleLabel.setPrefSize(600,100);
         titleLabel.setAlignment( Pos.CENTER);
-        titleLabel.setLayoutX(300);
+        titleLabel.setLayoutX(100);
         titleLabel.setLayoutY(150);
 
         soundSliderWithImage.addRow(0, soundImageView, soundSlider);
@@ -71,6 +77,12 @@ public class MainMenuPanel extends Pane {
             @Override
             public void handle(MouseEvent event) {
                 screenManager.viewGame();
+            }
+        });
+        exitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.exit(0);
             }
         });
     }

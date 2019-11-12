@@ -1,0 +1,14 @@
+@font-face {
+    /* this font is from https://www.1001freefonts.com/space-age.font
+    and is designed by Justin Callaghan. The owner declared it free for personal use.*/
+    src: url("resources/space_age.ttf");
+}
+
+.label {
+    -fx-font-family: "space age";
+    -fx-font-size: 80;
+}
+.button {
+    -fx-font-family: "space age";
+    -fx-font-size: 30;
+}
