@@ -22,6 +22,9 @@ public class ScreenManager {
     public Stage getMainStage(){
         return mainStage;
     }
+    public Scene getMainScene() {
+        return mainScene;
+    }
 
     public void viewMainMenu(){
         MainMenuPanel mainMenuPanel = new MainMenuPanel(this);

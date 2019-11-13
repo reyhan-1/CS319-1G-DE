@@ -9,8 +9,8 @@ public class MapManager {
     public MapManager(){
         collisionManager = new CollisionManager();
     }
-    public Ship addShip(String shipName) {
-        ship = new Ship( shipName);
+    public Ship addShip(String shipName, int x, int y) {
+        ship = new Ship( shipName, x, y);
         return ship;
     }
     public CollisionManager getCollisionManager() {
