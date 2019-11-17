@@ -16,6 +16,16 @@ public class GameEngine {
         mapManager = new MapManager();
     }
 
+    public Ship addShip(String shipName, int x, int y) {
+        return mapManager.addShip(shipName, x, y);
+    }
+
+    public Ship getShip(){
+        return mapManager.getShip();
+    }
+
+
+
     public InputManager getInputManager() {
         return inputManager;
     }
@@ -34,5 +44,13 @@ public class GameEngine {
 
     public ScreenManager getScreenManager() {
         return screenManager;
+    }
+
+    public int getShipPosX() {
+        return mapManager.getShip().getPosX();
+    }
+
+    public int getShipPosY() {
+        return mapManager.getShip().getPosY();
     }
 }

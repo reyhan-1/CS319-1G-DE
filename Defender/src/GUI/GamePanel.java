@@ -1,5 +1,6 @@
 package GUI;
 
+import GameLogic.GameEngine;
 import GameLogic.InputManager;
 import GameLogic.MapManager;
 import GameLogic.Ship;
@@ -13,14 +14,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 
 public class GamePanel extends Pane {
-    private MapManager mapManager;
     private ScreenManager screenManager;
-    private InputManager inputManager;
 
-    public GamePanel(ScreenManager screenManager1){
-        screenManager = screenManager1;
-        mapManager = screenManager.getGameEngine().getMapManager();
-        inputManager = screenManager.getGameEngine().getInputManager();
+    public GamePanel(ScreenManager sm){
+        screenManager = sm;
+
+        // set Background
         Image backgroundImage = new Image("GUI/resources/mapbg2.png", 3200,
                 600, true, true);
         BackgroundImage background = new BackgroundImage( backgroundImage, BackgroundRepeat.REPEAT,
@@ -28,33 +27,40 @@ public class GamePanel extends Pane {
         this.setMinSize(800,600);
         this.setBackground(new Background(background));
 
-        Ship ship = mapManager.addShip( "new Ship", 300, 300);
-        Image shipImage = ship.getSprite();
+        // set Ship
+        screenManager.addShip( "new Ship", 300, 300);
+        Image shipImage = screenManager.getShip().getSprite();
         ImageView shipImageView = new ImageView(shipImage);
         shipImageView.setFitHeight(100);
         shipImageView.setFitWidth(100);
-        shipImageView.setLayoutX( ship.getPosX());
-        shipImageView.setLayoutY( ship.getPosY());
+        shipImageView.setLayoutX( screenManager.getShipPosX());
+        shipImageView.setLayoutY( screenManager.getShipPosY());
         this.getChildren().add(shipImageView);
 
+        // input management
         screenManager.getMainScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if ( event.getCode() == KeyCode.RIGHT){
-                    ship.move( 10, 0);
-                    shipImageView.setLayoutX( ship.getPosX());
+                    shipImageView.setScaleX( 1);
+                    screenManager.getShip().move( 10, 0);
+                    shipImageView.setLayoutX( screenManager.getShip().getPosX());
                 }
                 if ( event.getCode() == KeyCode.LEFT){
-                    ship.move( -10, 0);
-                    shipImageView.setLayoutX( ship.getPosX());
+                    shipImageView.setScaleX( -1);
+                    screenManager.getShip().move( -10, 0);
+                    shipImageView.setLayoutX( screenManager.getShip().getPosX());
                 }
                 if ( event.getCode() == KeyCode.UP){
-                    ship.move( 0, -10);
-                    shipImageView.setLayoutY( ship.getPosY());
+                    screenManager.getShip().move( 0, -10);
+                    shipImageView.setLayoutY( screenManager.getShip().getPosY());
                 }
                 if ( event.getCode() == KeyCode.DOWN){
-                    ship.move( 0, 10);
-                    shipImageView.setLayoutY( ship.getPosY());
+                    screenManager.getShip().move( 0, 10);
+                    shipImageView.setLayoutY( screenManager.getShip().getPosY());
+                }
+                if ( event.getCode() == KeyCode.ESCAPE){
+                    screenManager.viewPauseMenu();
                 }
             }
         });

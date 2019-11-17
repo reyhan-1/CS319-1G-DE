@@ -1,8 +1,13 @@
 package GUI;
 
 import GameLogic.GameEngine;
+import GameLogic.Ship;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
+import javafx.stage.Popup;
+import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 
 public class ScreenManager {
@@ -26,12 +31,31 @@ public class ScreenManager {
         return mainScene;
     }
 
+    public Ship addShip(String shipName, int x, int y) {
+        return gameEngine.addShip(shipName, x, y);
+    }
+    public Ship getShip(){
+        return gameEngine.getShip();
+    }
+    public int getShipPosX(){
+        return gameEngine.getShipPosX();
+    }
+    public int getShipPosY(){
+        return gameEngine.getShipPosY();
+    }
     public void viewMainMenu(){
         MainMenuPanel mainMenuPanel = new MainMenuPanel(this);
         mainPane.getChildren().add( mainMenuPanel);
     }
 
     public void viewPauseMenu(){
+        Popup popup = new Popup();
+        popup.setX( 300);
+        popup.setY( 200);
+        PauseMenuPanel pauseMenuPanel = new PauseMenuPanel( this);
+        popup.getContent().add( pauseMenuPanel);
+
+        popup.show( mainStage);
 
     }
 
