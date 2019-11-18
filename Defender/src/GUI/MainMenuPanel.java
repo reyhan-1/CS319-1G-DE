@@ -76,7 +76,7 @@ public class MainMenuPanel extends Pane {
         playButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                screenManager.viewGame();
+                screenManager.viewEnemies();
             }
         });
         exitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {

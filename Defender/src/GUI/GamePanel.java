@@ -13,10 +13,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 
+import java.util.concurrent.TimeUnit;
+
 public class GamePanel extends Pane {
     private ScreenManager screenManager;
 
-    public GamePanel(ScreenManager sm){
+    public GamePanel(ScreenManager sm) throws InterruptedException {
         screenManager = sm;
 
         // set Background

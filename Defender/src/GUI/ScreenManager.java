@@ -10,6 +10,8 @@ import javafx.stage.Popup;
 import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 
+import java.util.concurrent.TimeUnit;
+
 public class ScreenManager {
     private Pane mainPane;
     private Scene mainScene;
@@ -60,13 +62,25 @@ public class ScreenManager {
     }
 
     public void viewGame(){
-        GamePanel gamePanel = new GamePanel(this);
+        GamePanel gamePanel = null;
+        try {
+            gamePanel = new GamePanel(this);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         mainPane.getChildren().clear();
         mainPane.getChildren().add( gamePanel);
     }
 
     public void viewEnemies(){
-
+        EnemiesPanel enemiesPanel = null;
+        try {
+            enemiesPanel = new EnemiesPanel(this);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        mainPane.getChildren().clear();
+        mainPane.getChildren().add( enemiesPanel);
     }
 
     public void viewHelp(){
