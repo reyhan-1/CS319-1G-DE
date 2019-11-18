@@ -1,6 +1,7 @@
 package GUI;
 
 import GameLogic.GameEngine;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -8,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -50,6 +52,13 @@ public class PauseMenuPanel extends Pane {
 
         this.setBackground( new Background(new BackgroundFill(Color.WHITE,
                 CornerRadii.EMPTY, Insets.EMPTY)));
+
+        themeToggle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                screenManager.changeTheme();
+            }
+        });
     }
 
 

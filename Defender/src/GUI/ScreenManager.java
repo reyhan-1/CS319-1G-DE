@@ -17,6 +17,7 @@ public class ScreenManager {
     private Scene mainScene;
     private Stage mainStage;
     private GameEngine gameEngine;
+    private GamePanel sGamePanel;
 
     public ScreenManager( GameEngine gameEngine1){
         mainPane = new Pane();
@@ -70,6 +71,7 @@ public class ScreenManager {
         }
         mainPane.getChildren().clear();
         mainPane.getChildren().add( gamePanel);
+        sGamePanel = gamePanel;
     }
 
     public void viewEnemies(){
@@ -97,5 +99,9 @@ public class ScreenManager {
 
     public GameEngine getGameEngine() {
         return gameEngine;
+    }
+
+    public void changeTheme(){
+        sGamePanel.changeTheme();
     }
 }

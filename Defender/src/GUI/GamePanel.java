@@ -17,15 +17,24 @@ import java.util.concurrent.TimeUnit;
 
 public class GamePanel extends Pane {
     private ScreenManager screenManager;
+    private boolean theme; // true is night, false is day
+    private BackgroundImage background, backgroundDay;
 
     public GamePanel(ScreenManager sm) throws InterruptedException {
         screenManager = sm;
 
         // set Background
-        Image backgroundImage = new Image("GUI/resources/mapbg2.png", 3200,
+        theme = true;
+        Image backgroundImageNight = new Image("GUI/resources/mapbg2.png", 3200,
                 600, true, true);
-        BackgroundImage background = new BackgroundImage( backgroundImage, BackgroundRepeat.REPEAT,
+        background = new BackgroundImage( backgroundImageNight, BackgroundRepeat.REPEAT,
                 BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
+
+        Image backgroundImageDay = new Image("GUI/resources/mapbgDay.png", 3200,
+                600, true, true);
+        backgroundDay = new BackgroundImage( backgroundImageDay, BackgroundRepeat.REPEAT,
+                BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
+
         this.setMinSize(800,600);
         this.setBackground(new Background(background));
 
@@ -66,5 +75,13 @@ public class GamePanel extends Pane {
                 }
             }
         });
+    }
+    public void changeTheme(){
+        if (theme == true){
+            this.setBackground(new Background(backgroundDay));
+        }
+        else {
+            this.setBackground(new Background(background));
+        }
     }
 }
