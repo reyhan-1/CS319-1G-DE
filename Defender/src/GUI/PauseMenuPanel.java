@@ -26,23 +26,31 @@ public class PauseMenuPanel extends Pane {
         screenManager = sm;
 
         this.setMinSize(200,200);
-        this.setLayoutX( 300);
-        this.setLayoutY( 200);
+        this.setLayoutX( 230);
+        this.setLayoutY( 50);
 
         GridPane mainPane = new GridPane();
         GridPane buttons = new GridPane();
 
-        pauseLabel = new Label("PAUSE");
-        pauseLabel.setLayoutX( 100);
-        pauseLabel.setLayoutY( 20);
+        pauseLabel = new Label("PAUSED");
+        Font labelFont = new Font( "Arial", 24);
+        pauseLabel.setFont( labelFont);
+        pauseLabel.setStyle("-fx-text-fill: yellow");
+        pauseLabel.setPrefSize( 100, 50);
+        pauseLabel.setLayoutX( 70);
+        pauseLabel.setLayoutY( 25);
 
         helpButton = new Button("Help");
         themeToggle = new ToggleButton("Change Theme");
         quitButton = new Button("Quit");
+        helpButton.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
+        themeToggle.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
+        quitButton.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
         buttons.addRow( 0, helpButton, themeToggle, quitButton);
-        buttons.setLayoutX( 100);
-        buttons.setLayoutY( 150);
-
+        buttons.setLayoutX( 15);
+        buttons.setLayoutY( 100);
+        buttons.setHgap( 10);
+        buttons.setVgap( 10);
         soundSlider = new Slider(0, 100, 50);
         soundSlider.setPrefSize( 20, 20);
         soundSlider.setLayoutX( 180);
@@ -50,8 +58,9 @@ public class PauseMenuPanel extends Pane {
 
         this.getChildren().addAll( pauseLabel, buttons, soundSlider);
 
-        this.setBackground( new Background(new BackgroundFill(Color.WHITE,
+        this.setBackground( new Background(new BackgroundFill(Color.BLACK,
                 CornerRadii.EMPTY, Insets.EMPTY)));
+        this.setStyle("-fx-border-color: yellow");
 
         themeToggle.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

@@ -25,12 +25,12 @@ public class GamePanel extends Pane {
 
         // set Background
         theme = true;
-        Image backgroundImageNight = new Image("GUI/resources/mapbg2.png", 3200,
+        Image backgroundImageNight = new Image("GUI/resources/night_theme.jpg", 3200,
                 600, true, true);
         background = new BackgroundImage( backgroundImageNight, BackgroundRepeat.REPEAT,
                 BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
 
-        Image backgroundImageDay = new Image("GUI/resources/mapbgDay.png", 3200,
+        Image backgroundImageDay = new Image("GUI/resources/day_theme.jpg", 3200,
                 600, true, true);
         backgroundDay = new BackgroundImage( backgroundImageDay, BackgroundRepeat.REPEAT,
                 BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
@@ -79,9 +79,11 @@ public class GamePanel extends Pane {
     public void changeTheme(){
         if (theme == true){
             this.setBackground(new Background(backgroundDay));
+            theme = false;
         }
         else {
             this.setBackground(new Background(background));
+            theme = true;
         }
     }
 }
