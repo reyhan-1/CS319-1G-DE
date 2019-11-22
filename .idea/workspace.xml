@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="42542051-d90c-43e3-861e-52ff39a00f99" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="FxmlFile" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\oguz\Documents\GitHub\CS319-1G-DE\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1TKkG86py6NOMETyicwq7TTIDHX" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/javafx-sdk-11.0.2/lib/javafx.web.jar!/" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\oguz\Documents\GitHub\CS319-1G-DE\Defender\src\GUI\resources" />
+      <recent name="C:\Users\oguz\Documents\GitHub\CS319-1G-DE\Defender\src\sample" />
+      <recent name="C:\Users\oguz\Documents\GitHub\CS319-1G-DE\Defender\resources" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI.Main" />
+      <module name="CS319-1G-DE" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sample.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="42542051-d90c-43e3-861e-52ff39a00f99" name="Default Changelist" comment="" />
+      <created>1573216075916</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1573216075916</updated>
+      <workItem from="1573216079400" duration="601000" />
+      <workItem from="1573411718907" duration="26000" />
+      <workItem from="1573411794342" duration="294000" />
+      <workItem from="1573412105561" duration="8075000" />
+      <workItem from="1573420678525" duration="39000" />
+      <workItem from="1573420795423" duration="603000" />
+      <workItem from="1573421650215" duration="254000" />
+      <workItem from="1573591386441" duration="99000" />
+      <workItem from="1573591499756" duration="5269000" />
+      <workItem from="1574024669535" duration="797000" />
+      <workItem from="1574026037288" duration="22000" />
+      <workItem from="1574422770774" duration="59000" />
+      <workItem from="1574423007231" duration="86000" />
+      <workItem from="1574423197761" duration="72000" />
+      <workItem from="1574423285369" duration="25000" />
+      <workItem from="1574423405874" duration="115000" />
+      <workItem from="1574423817792" duration="5000" />
+      <workItem from="1574423885214" duration="16000" />
+    </task>
+    <task id="LOCAL-00001" summary="created ScreenManager and MainMenuPanel classes.&#10;MainMenuPanel now has a background image, a title, and buttons.">
+      <created>1573419710883</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573419710883</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Changed MainMenuPanel style and fonts.&#10;Added MainMenuPanel exit on click function.&#10;Created Ship class and added an Image for it.&#10;GamePanel now has a Ship Image at the center.">
+      <created>1573596682609</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1573596682609</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="created ScreenManager and MainMenuPanel classes.&#10;MainMenuPanel now has a background image, a title, and buttons." />
+    <MESSAGE value="Changed MainMenuPanel style and fonts.&#10;Added MainMenuPanel exit on click function.&#10;Created Ship class and added an Image for it.&#10;GamePanel now has a Ship Image at the center." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed MainMenuPanel style and fonts.&#10;Added MainMenuPanel exit on click function.&#10;Created Ship class and added an Image for it.&#10;GamePanel now has a Ship Image at the center." />
+  </component>
+</project>
