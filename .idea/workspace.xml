@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42542051-d90c-43e3-861e-52ff39a00f99" name="Default Changelist" comment="" />
+    <list default="true" id="42542051-d90c-43e3-861e-52ff39a00f99" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +111,8 @@
       <workItem from="1574423405874" duration="115000" />
       <workItem from="1574423817792" duration="5000" />
       <workItem from="1574423885214" duration="16000" />
+      <workItem from="1574424093286" duration="127000" />
+      <workItem from="1574424287941" duration="106000" />
     </task>
     <task id="LOCAL-00001" summary="created ScreenManager and MainMenuPanel classes.&#10;MainMenuPanel now has a background image, a title, and buttons.">
       <created>1573419710883</created>
