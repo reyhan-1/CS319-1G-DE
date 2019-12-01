@@ -21,4 +21,4 @@ Defender is a horizontally scrolling shoot 'em up, the game is set on an unnamed
 * [First Iteration Design Report](https://docs.google.com/document/d/14IYDKv3U691FO_2tURb3YoFpb22GJuVd0SUzka2YrfY/edit?usp=sharing)
 * [First Iteration Final Report](https://docs.google.com/document/d/13GELK04jHV4weMeYai5LXqW5SG1GoioDZTDov_6CC8A/edit?usp=sharing)
 * [First Iteration Video](https://youtu.be/4UYWW4Ab-_s)
-
+* [Second Iteration Analysis Report](https://docs.google.com/document/d/1qGTOvbF9WYx_Be4xzx6xO3dyCsOTYk8V_sgvSQl5-pk/edit#)
