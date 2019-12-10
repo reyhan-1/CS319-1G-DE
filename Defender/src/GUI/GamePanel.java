@@ -1,9 +1,7 @@
 package GUI;
 
-import GameLogic.GameEngine;
-import GameLogic.InputManager;
-import GameLogic.MapManager;
-import GameLogic.Ship;
+import GameLogic.*;
+import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -13,6 +11,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 public class GamePanel extends Pane {
@@ -39,14 +39,34 @@ public class GamePanel extends Pane {
         this.setBackground(new Background(background));
 
         // set Ship
-        screenManager.addShip( "new Ship", 300, 300);
+        screenManager.addShip( 0, 300, 300);
         Image shipImage = screenManager.getShip().getSprite();
         ImageView shipImageView = new ImageView(shipImage);
         shipImageView.setFitHeight(100);
         shipImageView.setFitWidth(100);
         shipImageView.setLayoutX( screenManager.getShipPosX());
         shipImageView.setLayoutY( screenManager.getShipPosY());
+        shipImageView.setScaleX( 1);
         this.getChildren().add(shipImageView);
+
+        AnimationTimer animator = new AnimationTimer()
+        {
+            @Override
+            public void handle(long arg0)
+            {
+                for ( int i = 0; i < screenManager.getBulletsList().size(); i++){
+                    Bullet bullet = screenManager.getBulletsList().get(i);
+                    ImageView bulletImageView = bullet.getImageView();
+                    GamePanel.this.getChildren().remove( bulletImageView);
+                    bullet.move(bullet.getDirection() * 10, 0);
+                    bulletImageView.setLayoutX( bullet.getPosX());
+                    bulletImageView.setLayoutY( bullet.getPosY());
+
+                    GamePanel.this.getChildren().add(bulletImageView);
+                }
+            }
+        };
+        animator.start();
 
         // input management
         screenManager.getMainScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -70,11 +90,28 @@ public class GamePanel extends Pane {
                     screenManager.getShip().move( 0, 10);
                     shipImageView.setLayoutY( screenManager.getShip().getPosY());
                 }
+                if ( event.getCode() == KeyCode.SPACE){
+                    int direction = (int) shipImageView.getScaleX();
+                    Bullet bullet;
+                    ImageView bulletImageView = new ImageView( new Image( "GUI/resources/bullet2.png"
+                            , 10, 3, false, true));
+                    if ( direction == 1) {
+                        bullet = screenManager.addBullet(0, screenManager.getShipPosX() + 65,
+                                screenManager.getShipPosY() + 55, direction);
+                    }
+                    else{
+                        bullet = screenManager.addBullet(0, screenManager.getShipPosX() + 30,
+                                screenManager.getShipPosY() + 55, direction);
+                        bulletImageView.setScaleX( -1);
+                    }
+                    bullet.setImageView( bulletImageView);
+                }
                 if ( event.getCode() == KeyCode.ESCAPE){
                     screenManager.viewPauseMenu();
                 }
             }
         });
+
     }
     public void changeTheme(){
         if (theme == true){

@@ -2,6 +2,8 @@ package GameLogic;
 
 import GUI.ScreenManager;
 
+import java.util.ArrayList;
+
 public class GameEngine {
     private InputManager inputManager;
     private SoundManager soundManager;
@@ -16,12 +18,19 @@ public class GameEngine {
         mapManager = new MapManager();
     }
 
-    public Ship addShip(String shipName, int x, int y) {
-        return mapManager.addShip(shipName, x, y);
+    public Ship addShip( int id, int x, int y) {
+        return mapManager.addShip( id, x, y);
     }
 
     public Ship getShip(){
         return mapManager.getShip();
+    }
+
+    public Bullet addBullet( int id, int x, int y, int dir){
+        return mapManager.addBullet( id, x, y, dir);
+    }
+    public ArrayList<Bullet> getBulletsList() {
+        return mapManager.getBulletsList();
     }
 
 

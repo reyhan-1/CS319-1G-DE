@@ -1,5 +1,6 @@
 package GUI;
 
+import GameLogic.Bullet;
 import GameLogic.GameEngine;
 import GameLogic.Ship;
 import javafx.geometry.Pos;
@@ -10,6 +11,7 @@ import javafx.stage.Popup;
 import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class ScreenManager {
@@ -34,11 +36,17 @@ public class ScreenManager {
         return mainScene;
     }
 
-    public Ship addShip(String shipName, int x, int y) {
-        return gameEngine.addShip(shipName, x, y);
+    public Ship addShip( int id, int x, int y) {
+        return gameEngine.addShip( id, x, y);
     }
     public Ship getShip(){
         return gameEngine.getShip();
+    }
+    public Bullet addBullet( int id, int x, int y, int dir){
+        return gameEngine.addBullet( id, x, y, dir);
+    }
+    public ArrayList<Bullet> getBulletsList() {
+        return gameEngine.getBulletsList();
     }
     public int getShipPosX(){
         return gameEngine.getShipPosX();

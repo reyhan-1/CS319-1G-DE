@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42542051-d90c-43e3-861e-52ff39a00f99" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Defender/src/GUI/resources/bullet2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Defender/src/GameLogic/Bullet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Defender/src/GameLogic/GameCharacter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/src/GUI/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GUI/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/src/GUI/ScreenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GUI/ScreenManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/GameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/GameEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/MapManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/Ship.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,9 +21,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -39,7 +47,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/javafx-sdk-11.0.2/lib/javafx.web.jar!/" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
@@ -113,6 +121,9 @@
       <workItem from="1574423885214" duration="16000" />
       <workItem from="1574424093286" duration="127000" />
       <workItem from="1574424287941" duration="106000" />
+      <workItem from="1574941561527" duration="51000" />
+      <workItem from="1574966765953" duration="186000" />
+      <workItem from="1575971194755" duration="9013000" />
     </task>
     <task id="LOCAL-00001" summary="created ScreenManager and MainMenuPanel classes.&#10;MainMenuPanel now has a background image, a title, and buttons.">
       <created>1573419710883</created>
