@@ -51,15 +51,12 @@ public class GamePanel extends Pane {
         this.getChildren().add(shipImageView);
 
         // add enemy to game engine
-        Enemy enemy = screenManager.addEnemy( 0, 100, 200);
-        // adjust enemy's graphical attributes
-        Image enemyImage = screenManager.getEnemiesList().get(0).getSprite();
-        ImageView enemyImageView = new ImageView(enemyImage);
-        enemyImageView.setLayoutX( screenManager.getEnemiesList().get(0).getPosX());
-        enemyImageView.setLayoutY( screenManager.getEnemiesList().get(0).getPosY());
-        enemy.setImageView( enemyImageView);
-        // add enemy to the pane
-        this.getChildren().add(enemy.getImageView());
+        for ( int i = 200; i < 400; i = i + 50){
+            Enemy enemy = screenManager.addEnemy( 0, 600, i);
+            enemy.getImageView().setLayoutX( enemy.getPosX());
+            enemy.getImageView().setLayoutY( enemy.getPosY());
+            this.getChildren().add(enemy.getImageView());
+        }
 
         // animation for bullet movement and collision checking
         AnimationTimer animator = new AnimationTimer()
@@ -136,8 +133,8 @@ public class GamePanel extends Pane {
                 if ( event.getCode() == KeyCode.SPACE){
                     int direction = (int) shipImageView.getScaleX(); // get ship direction
                     Bullet bullet;
-                    ImageView bulletImageView = new ImageView( new Image( "GUI/resources/bullet2.png"
-                            , 10, 3, false, true));
+                    //ImageView bulletImageView = new ImageView( new Image( "GUI/resources/bullet2.png"
+                      //      , 10, 3, false, true));
                     // this if-else creates the bullet in ship's direction and with respect to ship's location
                     if ( direction == 1) {
                         bullet = screenManager.addBullet(0, screenManager.getShipPosX() + 100,
@@ -146,9 +143,8 @@ public class GamePanel extends Pane {
                     else{
                         bullet = screenManager.addBullet(0, screenManager.getShipPosX() + 0,
                                 screenManager.getShipPosY() + 15, direction, true);
-                        bulletImageView.setScaleX( -1);
+                        bullet.getImageView().setScaleX( -1);
                     }
-                    bullet.setImageView( bulletImageView);
                 }
                 if ( event.getCode() == KeyCode.ESCAPE){
                     screenManager.viewPauseMenu();

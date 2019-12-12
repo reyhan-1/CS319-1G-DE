@@ -12,6 +12,8 @@ public class Bullet extends GameCharacter{
         super(id, x, y, "GUI/resources/bullet2.png", 10, 5);
         this.direction = direction;
         this.owner = owner;
+        ImageView bulletImageView = new ImageView( this.getSprite());
+        setImageView( bulletImageView);
     }
 
     public int getDirection(){
