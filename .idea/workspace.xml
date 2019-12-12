@@ -2,15 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42542051-d90c-43e3-861e-52ff39a00f99" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Defender/src/GUI/resources/bullet2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Defender/src/GameLogic/Bullet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Defender/src/GameLogic/GameCharacter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Defender/src/GameLogic/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/ScreenManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/ScreenManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/CollisionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/CollisionManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/GameEngine.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/GameEngine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/MapManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/MapManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/Ship.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/Ship.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/src/GUI/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GUI/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/src/GUI/ScreenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GUI/ScreenManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/src/GUI/resources/shipSprite.png" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GUI/resources/shipSprite.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/CollisionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/CollisionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/GameCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/GameCharacter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/GameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/GameEngine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/MapManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/Ship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprites/bomber.png" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GUI/resources/bomber.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprites/ship.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +134,9 @@
       <workItem from="1574424287941" duration="106000" />
       <workItem from="1574941561527" duration="51000" />
       <workItem from="1574966765953" duration="186000" />
-      <workItem from="1575971194755" duration="9013000" />
+      <workItem from="1575971194755" duration="9685000" />
+      <workItem from="1575992217491" duration="157000" />
+      <workItem from="1576162565964" duration="13400000" />
     </task>
     <task id="LOCAL-00001" summary="created ScreenManager and MainMenuPanel classes.&#10;MainMenuPanel now has a background image, a title, and buttons.">
       <created>1573419710883</created>
@@ -139,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573596682609</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="The Ship can shoot now. The bullet moves smoothly and in either direction. GameCharacter class is created and inheritance relationship between it and Ship and Bullet classes is established.">
+      <created>1575980867180</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1575980867180</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +181,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="created ScreenManager and MainMenuPanel classes.&#10;MainMenuPanel now has a background image, a title, and buttons." />
     <MESSAGE value="Changed MainMenuPanel style and fonts.&#10;Added MainMenuPanel exit on click function.&#10;Created Ship class and added an Image for it.&#10;GamePanel now has a Ship Image at the center." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed MainMenuPanel style and fonts.&#10;Added MainMenuPanel exit on click function.&#10;Created Ship class and added an Image for it.&#10;GamePanel now has a Ship Image at the center." />
+    <MESSAGE value="The Ship can shoot now. The bullet moves smoothly and in either direction. GameCharacter class is created and inheritance relationship between it and Ship and Bullet classes is established." />
+    <option name="LAST_COMMIT_MESSAGE" value="The Ship can shoot now. The bullet moves smoothly and in either direction. GameCharacter class is created and inheritance relationship between it and Ship and Bullet classes is established." />
   </component>
 </project>

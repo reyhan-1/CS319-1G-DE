@@ -1,17 +1,22 @@
 package GameLogic;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class GameCharacter {
     private int id;
     private Image sprite;
     private int posX, posY;
+    private int width, height;
+    private ImageView imageView;
 
-    public GameCharacter ( int id, int x, int y, String imageUrl, int imageW, int imageH){
+    public GameCharacter (int id, int x, int y, String imageUrl, int imageW, int imageH){
         this.id = id;
         sprite = new Image( imageUrl, imageW, imageH, false, true);
         posX = x;
         posY = y;
+        width = imageW;
+        height = imageH;
     }
 
     public void move( int x, int y){
@@ -27,5 +32,18 @@ public class GameCharacter {
     }
     public Image getSprite(){
         return sprite;
+    }
+    public int getWidth() {
+        return width;
+    }
+    public int getHeight() {
+        return height;
+    }
+    public ImageView getImageView() {
+        return imageView;
+    }
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
+
     }
 }
