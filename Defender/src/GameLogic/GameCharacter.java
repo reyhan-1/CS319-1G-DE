@@ -17,33 +17,37 @@ public class GameCharacter {
         posY = y;
         width = imageW;
         height = imageH;
+        imageView = new ImageView( this.getSprite());
     }
 
     public void move( int x, int y){
         posX = posX + x;
         posY = posY + y;
     }
+
     public int getId(){ return id;}
+
     public int getPosX(){
         return posX;
     }
+
     public int getPosY(){
         return posY;
     }
+
     public Image getSprite(){
         return sprite;
     }
+
     public int getWidth() {
         return width;
     }
+
     public int getHeight() {
         return height;
     }
+
     public ImageView getImageView() {
         return imageView;
-    }
-    public void setImageView(ImageView imageView) {
-        this.imageView = imageView;
-
     }
 }

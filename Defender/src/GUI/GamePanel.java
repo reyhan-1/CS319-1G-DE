@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class GamePanel extends Pane {
@@ -35,22 +36,19 @@ public class GamePanel extends Pane {
                 BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
 
         this.setMinSize(800,600);
-        // arrange background to default
+        // set background to default
         this.setBackground(new Background(background));
 
-        // add ship to game engine
-        screenManager.addShip( 0, 300, 300);
+        // add the ship
+        Ship ship = screenManager.addShip( 0, 300, 300);
         // adjust ship's graphical attributes
-        Image shipImage = screenManager.getShip().getSprite();
-        ImageView shipImageView = new ImageView(shipImage);
-        shipImageView.setLayoutX( screenManager.getShipPosX());
-        shipImageView.setLayoutY( screenManager.getShipPosY());
-        shipImageView.setScaleX( 1);
-        screenManager.getShip().setImageView( shipImageView);
+        ship.getImageView().setLayoutX( screenManager.getShip().getPosX());
+        ship.getImageView().setLayoutY( screenManager.getShip().getPosY());
+        ship.getImageView().setScaleX( 1);
         // add ship to the pane
-        this.getChildren().add(shipImageView);
+        this.getChildren().add(ship.getImageView());
 
-        // add enemy to game engine
+        // add enemies
         for ( int i = 200; i < 400; i = i + 50){
             Enemy enemy = screenManager.addEnemy( 0, 600, i);
             enemy.getImageView().setLayoutX( enemy.getPosX());
@@ -59,24 +57,67 @@ public class GamePanel extends Pane {
         }
 
         // animation for bullet movement and collision checking
-        AnimationTimer animator = new AnimationTimer()
+        AnimationTimer enemyAnimator = new AnimationTimer() {
+            private long time;
+            @Override
+            public void handle(long now) {
+                // this part is experimental
+                // moves enemies up and down at different speeds
+                if ( now - time > 10_000_000){
+                    for ( int i = 0; i < screenManager.getEnemiesList().size(); i++)
+                    {
+                        Enemy enemy = screenManager.getEnemiesList().get( i);
+                        if ( enemy.getDirection() == 1){
+                            if ( enemy.getPosY() + 50 > 600) {
+                                enemy.setDirection(0);
+                            }
+                        }
+                        else{
+                            if ( enemy.getPosY() - 50 < 0) {
+                                enemy.setDirection(1);
+                            }
+                        }
+
+
+                        if ( enemy.getDirection() == 1) {
+                            enemy.move(0, 2 * (i + 1));
+                        }
+                        else{
+                            enemy.move( 0, (-2)*(i + 1));
+                        }
+
+                        enemy.getImageView().setLayoutX( enemy.getPosX());
+                        enemy.getImageView().setLayoutY( enemy.getPosY());
+
+                    }
+                    time = now;
+                }
+            }
+        };
+
+        AnimationTimer bulletAnimator = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                for ( int i = 0; i < screenManager.getBulletsListS().size(); i++){
+                    // for each bullet in bullets list
+                    Bullet bullet = screenManager.getBulletsListS().get(i);
+                    // move the bullet behind the scenes
+                    bullet.move(bullet.getDirection() * 10, 0);
+                    bullet.getImageView().setLayoutX( bullet.getPosX());
+                    bullet.getImageView().setLayoutY( bullet.getPosY());
+                    // if the bullet is beyond the map, remove it from the list
+                    if ( bullet.getPosX() > 800){
+                        screenManager.getBulletsListS().remove( bullet);
+                    }
+                }
+            }
+        };
+
+        AnimationTimer collisionAnimator = new AnimationTimer()
         {
             @Override
             public void handle(long arg0)
             {
-                for ( int i = 0; i < screenManager.getBulletsListS().size(); i++){
-                    // for each bullet in bullets list
-                    Bullet bullet = screenManager.getBulletsListS().get(i);
-                    ImageView bulletImageView = bullet.getImageView();
-                    // delete the image at its current location
-                    GamePanel.this.getChildren().remove( bulletImageView);
-                    // move the bullet behind the scenes
-                    bullet.move(bullet.getDirection() * 10, 0);
-                    bulletImageView.setLayoutX( bullet.getPosX());
-                    bulletImageView.setLayoutY( bullet.getPosY());
-                    // place the bullet back on the panel
-                    GamePanel.this.getChildren().add(bulletImageView);
-                }
                 ArrayList<GameCharacter> toDestroyList = new ArrayList<GameCharacter>();
                 // check collision between ship bullets and enemies
                 ArrayList<GameCharacter> toDestroy1 = screenManager.checkCollisionB_E( screenManager.getBulletsListS(),
@@ -103,48 +144,51 @@ public class GamePanel extends Pane {
                     ImageView gcImageView = gc.getImageView();
                     GamePanel.this.getChildren().remove( gcImageView);
                 }
-
             }
         };
-        animator.start();
+
+        enemyAnimator.start();
+        bulletAnimator.start();
+        collisionAnimator.start();
 
         // input management
         screenManager.getMainScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 if ( event.getCode() == KeyCode.RIGHT){
-                    shipImageView.setScaleX( 1); // rotates image to the right
+                    ship.getImageView().setScaleX( 1); // rotates image to the right
                     screenManager.getShip().move( 10, 0);
-                    shipImageView.setLayoutX( screenManager.getShip().getPosX());
+                    ship.getImageView().setLayoutX( screenManager.getShip().getPosX());
                 }
                 if ( event.getCode() == KeyCode.LEFT){
-                    shipImageView.setScaleX( -1); // rotates image to the left
+                    ship.getImageView().setScaleX( -1); // rotates image to the left
                     screenManager.getShip().move( -10, 0);
-                    shipImageView.setLayoutX( screenManager.getShip().getPosX());
+                    ship.getImageView().setLayoutX( screenManager.getShip().getPosX());
                 }
                 if ( event.getCode() == KeyCode.UP){
                     screenManager.getShip().move( 0, -10);
-                    shipImageView.setLayoutY( screenManager.getShip().getPosY());
+                    ship.getImageView().setLayoutY( screenManager.getShip().getPosY());
                 }
                 if ( event.getCode() == KeyCode.DOWN){
                     screenManager.getShip().move( 0, 10);
-                    shipImageView.setLayoutY( screenManager.getShip().getPosY());
+                    ship.getImageView().setLayoutY( screenManager.getShip().getPosY());
                 }
                 if ( event.getCode() == KeyCode.SPACE){
-                    int direction = (int) shipImageView.getScaleX(); // get ship direction
+                    int direction = (int) ship.getImageView().getScaleX(); // get ship direction
                     Bullet bullet;
                     //ImageView bulletImageView = new ImageView( new Image( "GUI/resources/bullet2.png"
                       //      , 10, 3, false, true));
                     // this if-else creates the bullet in ship's direction and with respect to ship's location
                     if ( direction == 1) {
-                        bullet = screenManager.addBullet(0, screenManager.getShipPosX() + 100,
-                                screenManager.getShipPosY() + 15, direction, true);
+                        bullet = screenManager.addBullet(0, screenManager.getShip().getPosX() + 100,
+                                screenManager.getShip().getPosY() + 15, direction, true);
                     }
                     else{
-                        bullet = screenManager.addBullet(0, screenManager.getShipPosX() + 0,
-                                screenManager.getShipPosY() + 15, direction, true);
+                        bullet = screenManager.addBullet(0, screenManager.getShip().getPosX() + 0,
+                                screenManager.getShip().getPosY() + 15, direction, true);
                         bullet.getImageView().setScaleX( -1);
                     }
+                    GamePanel.this.getChildren().add(bullet.getImageView());
                 }
                 if ( event.getCode() == KeyCode.ESCAPE){
                     screenManager.viewPauseMenu();

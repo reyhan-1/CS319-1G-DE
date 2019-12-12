@@ -27,14 +27,6 @@ public class ScreenManager {
         mainStage.setScene( mainScene);
     }
 
-    public Stage getMainStage(){
-        return mainStage;
-    }
-
-    public Scene getMainScene() {
-        return mainScene;
-    }
-
     public Ship addShip( int id, int x, int y) {
         return gameEngine.addShip( id, x, y);
     }
@@ -43,34 +35,8 @@ public class ScreenManager {
         return gameEngine.addEnemy( id, x, y);
     }
 
-    public Ship getShip(){
-        return gameEngine.getShip();
-    }
-
     public Bullet addBullet( int id, int x, int y, int dir, boolean owner){
         return gameEngine.addBullet( id, x, y, dir, owner);
-    }
-
-    public ArrayList<Bullet> getBulletsListS() {
-        return gameEngine.getBulletsListS();
-    }
-    public ArrayList<Bullet> getBulletsListE() {
-        return gameEngine.getBulletsListE();
-    }
-    public ArrayList<Ship> getShipsList() {
-        return gameEngine.getShipsList();
-    }
-
-    public ArrayList<Enemy> getEnemiesList() {
-        return gameEngine.getEnemiesList();
-    }
-
-    public int getShipPosX(){
-        return gameEngine.getShipPosX();
-    }
-
-    public int getShipPosY(){
-        return gameEngine.getShipPosY();
     }
 
     public ArrayList<GameCharacter> checkCollisionB_E(ArrayList<Bullet> list1,
@@ -85,6 +51,42 @@ public class ScreenManager {
     public ArrayList<GameCharacter> checkCollisionS_E(ArrayList<Ship> list1,
                                                       ArrayList<Enemy> list2){
         return gameEngine.checkCollisionS_E( list1, list2);
+    }
+
+    public Ship getShip(){
+        return gameEngine.getShip();
+    }
+
+    public ArrayList<Bullet> getBulletsListS() {
+        return gameEngine.getBulletsListS();
+    }
+
+    public ArrayList<Bullet> getBulletsListE() {
+        return gameEngine.getBulletsListE();
+    }
+
+    public ArrayList<Ship> getShipsList() {
+        return gameEngine.getShipsList();
+    }
+
+    public ArrayList<Enemy> getEnemiesList() {
+        return gameEngine.getEnemiesList();
+    }
+
+    public Stage getMainStage(){
+        return mainStage;
+    }
+
+    public Scene getMainScene() {
+        return mainScene;
+    }
+
+    public GameEngine getGameEngine() {
+        return gameEngine;
+    }
+
+    public void changeTheme(){
+        sGamePanel.changeTheme();
     }
 
     public void viewMainMenu(){
@@ -136,13 +138,5 @@ public class ScreenManager {
 
     public void viewMiniMap(){
 
-    }
-
-    public GameEngine getGameEngine() {
-        return gameEngine;
-    }
-
-    public void changeTheme(){
-        sGamePanel.changeTheme();
     }
 }

@@ -15,10 +15,15 @@ public class CollisionManager {
                 GameCharacter gc2 = list2.get(j);
                 boolean destroyed = checkCollision( gc1, gc2);
                 if ( destroyed){
-                    list1.remove( gc1);
-                    list2.remove( gc2);
-                    destroyedList.add( gc1);
-                    destroyedList.add( gc2);
+                    // must check if a gc hasn't already been removed from its list
+                    if ( list1.contains(gc1)) {
+                        list1.remove(gc1);
+                        destroyedList.add(gc1);
+                    }
+                    if ( list2.contains( gc2)) {
+                        list2.remove(gc2);
+                        destroyedList.add(gc2);
+                    }
                 }
             }
         }
@@ -32,10 +37,15 @@ public class CollisionManager {
                 GameCharacter gc2 = list2.get(j);
                 boolean destroyed = checkCollision( gc1, gc2);
                 if ( destroyed){
-                    list1.remove( gc1);
-                    list2.remove( gc2);
-                    destroyedList.add( gc1);
-                    destroyedList.add( gc2);
+                    // must check if a gc hasn't already been removed from its list
+                    if ( list1.contains(gc1)) {
+                        list1.remove(gc1);
+                        destroyedList.add(gc1);
+                    }
+                    if ( list2.contains( gc2)) {
+                        list2.remove(gc2);
+                        destroyedList.add(gc2);
+                    }
                 }
             }
         }
@@ -49,10 +59,15 @@ public class CollisionManager {
                 GameCharacter gc2 = list2.get(j);
                 boolean destroyed = checkCollision( gc1, gc2);
                 if ( destroyed){
-                    list1.remove( gc1);
-                    list2.remove( gc2);
-                    destroyedList.add( gc1);
-                    destroyedList.add( gc2);
+                    // must check if a gc hasn't already been removed from its list
+                    if ( list1.contains(gc1)) {
+                        list1.remove(gc1);
+                        destroyedList.add(gc1);
+                    }
+                    if ( list2.contains( gc2)) {
+                        list2.remove(gc2);
+                        destroyedList.add(gc2);
+                    }
                 }
             }
         }

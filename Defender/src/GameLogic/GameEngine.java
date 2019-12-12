@@ -26,42 +26,9 @@ public class GameEngine {
         return mapManager.addEnemy( id, x, y);
     }
 
-    public Ship getShip(){
-        return mapManager.getShip();
-    }
-
     public Bullet addBullet( int id, int x, int y, int dir, boolean owner){
         return mapManager.addBullet( id, x, y, dir, owner);
     }
-    public ArrayList<Bullet> getBulletsListS() {
-        return mapManager.getBulletsListS();
-    }
-    public ArrayList<Bullet> getBulletsListE() {
-        return mapManager.getBulletsListE();
-    }
-
-    public ArrayList<Ship> getShipsList() {
-        return mapManager.getShipsList();
-    }
-
-    public ArrayList<Enemy> getEnemiesList() {
-        return mapManager.getEnemiesList();
-    }
-
-    public ArrayList<GameCharacter> checkCollisionB_E(ArrayList<Bullet> list1,
-                                                   ArrayList<Enemy> list2){
-        return mapManager.checkCollisionB_E( list1, list2);
-    }
-    public ArrayList<GameCharacter> checkCollisionB_S(ArrayList<Bullet> list1,
-                                                   ArrayList<Ship> list2){
-        return mapManager.checkCollisionB_S( list1, list2);
-    }
-    public ArrayList<GameCharacter> checkCollisionS_E(ArrayList<Ship> list1,
-                                                   ArrayList<Enemy> list2){
-        return mapManager.checkCollisionS_E( list1, list2);
-    }
-
-
 
     public InputManager getInputManager() {
         return inputManager;
@@ -83,11 +50,36 @@ public class GameEngine {
         return screenManager;
     }
 
-    public int getShipPosX() {
-        return mapManager.getShip().getPosX();
+    public ArrayList<Bullet> getBulletsListS() {
+        return mapManager.getBulletsListS();
     }
 
-    public int getShipPosY() {
-        return mapManager.getShip().getPosY();
+    public ArrayList<Bullet> getBulletsListE() {
+        return mapManager.getBulletsListE();
+    }
+
+    public ArrayList<Ship> getShipsList() {
+        return mapManager.getShipsList();
+    }
+
+    public ArrayList<Enemy> getEnemiesList() {
+        return mapManager.getEnemiesList();
+    }
+
+    public Ship getShip(){
+        return mapManager.getShip();
+    }
+
+    public ArrayList<GameCharacter> checkCollisionB_E(ArrayList<Bullet> list1,
+                                                   ArrayList<Enemy> list2){
+        return mapManager.checkCollisionB_E( list1, list2);
+    }
+    public ArrayList<GameCharacter> checkCollisionB_S(ArrayList<Bullet> list1,
+                                                   ArrayList<Ship> list2){
+        return mapManager.checkCollisionB_S( list1, list2);
+    }
+    public ArrayList<GameCharacter> checkCollisionS_E(ArrayList<Ship> list1,
+                                                   ArrayList<Enemy> list2){
+        return mapManager.checkCollisionS_E( list1, list2);
     }
 }
