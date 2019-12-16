@@ -5,16 +5,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/resources/shipSprite.png" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/resources/shipSprite.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/ScreenManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/ScreenManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/resources/night_theme.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/CollisionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/CollisionManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/GameEngine.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/GameEngine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/MapManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/MapManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/src/GUI/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GUI/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/src/GUI/ScreenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GUI/ScreenManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/CollisionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/CollisionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/GameCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/GameCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/GameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/GameEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/MapManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/MapManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/src/GameLogic/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GameLogic/Ship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Defender/src/GUI/resources/night_theme.jpg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -133,7 +130,8 @@
       <workItem from="1576162565964" duration="13400000" />
       <workItem from="1576179023737" duration="5261000" />
       <workItem from="1576184652155" duration="483000" />
-      <workItem from="1576188504974" duration="4729000" />
+      <workItem from="1576188504974" duration="4857000" />
+      <workItem from="1576524044981" duration="5861000" />
     </task>
     <task id="LOCAL-00001" summary="created ScreenManager and MainMenuPanel classes.&#10;MainMenuPanel now has a background image, a title, and buttons.">
       <created>1573419710883</created>
@@ -163,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576184277736</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added moving enemies.">
+      <created>1576193352498</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1576193352498</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,6 +192,7 @@
     <MESSAGE value="Changed MainMenuPanel style and fonts.&#10;Added MainMenuPanel exit on click function.&#10;Created Ship class and added an Image for it.&#10;GamePanel now has a Ship Image at the center." />
     <MESSAGE value="The Ship can shoot now. The bullet moves smoothly and in either direction. GameCharacter class is created and inheritance relationship between it and Ship and Bullet classes is established." />
     <MESSAGE value="Collisions are now fully operational." />
-    <option name="LAST_COMMIT_MESSAGE" value="Collisions are now fully operational." />
+    <MESSAGE value="Added moving enemies." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added moving enemies." />
   </component>
 </project>
