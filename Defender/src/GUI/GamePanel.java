@@ -1,23 +1,21 @@
 package GUI;
 
-import GameLogic.*;
+import GameLogic.Bullet;
+import GameLogic.Enemy;
+import GameLogic.GameCharacter;
+import GameLogic.Ship;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class GamePanel extends Pane {
     private ScreenManager screenManager;
@@ -254,5 +252,18 @@ public class GamePanel extends Pane {
             this.setBackground(new Background(background));
             theme = true;
         }
+    }
+
+    public void viewHelp(){
+        if (theme == true){
+            this.setBackground(new Background(backgroundDay));
+            theme = false;
+        }
+        else {
+            this.setBackground(new Background(background));
+            theme = true;
+        }
+
+
     }
 }
