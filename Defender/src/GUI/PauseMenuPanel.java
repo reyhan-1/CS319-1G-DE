@@ -1,18 +1,16 @@
 package GUI;
 
-import GameLogic.GameEngine;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Window;
 
 public class PauseMenuPanel extends Pane {
     private ScreenManager screenManager;
@@ -21,6 +19,7 @@ public class PauseMenuPanel extends Pane {
     private ToggleButton themeToggle;
     private Button quitButton;
     private Slider soundSlider;
+    private Button continueButton;
 
     public PauseMenuPanel(ScreenManager sm){
         screenManager = sm;
@@ -43,10 +42,13 @@ public class PauseMenuPanel extends Pane {
         helpButton = new Button("Help");
         themeToggle = new ToggleButton("Change Theme");
         quitButton = new Button("Quit");
+        continueButton = new Button("Continue");
         helpButton.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
         themeToggle.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
         quitButton.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
-        buttons.addRow( 0, helpButton, themeToggle, quitButton);
+        continueButton.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
+
+        buttons.addRow( 0, helpButton, themeToggle, quitButton, continueButton);
         buttons.setLayoutX( 15);
         buttons.setLayoutY( 100);
         buttons.setHgap( 10);
@@ -56,7 +58,7 @@ public class PauseMenuPanel extends Pane {
         soundSlider.setLayoutX( 180);
         soundSlider.setLayoutY( 0);
 
-        this.getChildren().addAll( pauseLabel, buttons, soundSlider);
+        this.getChildren().addAll(pauseLabel, buttons, soundSlider);
 
         this.setBackground( new Background(new BackgroundFill(Color.BLACK,
                 CornerRadii.EMPTY, Insets.EMPTY)));
@@ -68,6 +70,35 @@ public class PauseMenuPanel extends Pane {
                 screenManager.changeTheme();
             }
         });
+
+        helpButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                screenManager.viewHelp();
+            }
+        });
+
+        quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.exit(0);
+            }
+        });
+
+        continueButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Window stage = continueButton.getScene().getWindow();
+                stage.hide();
+            }
+        });
+
+        soundSlider.valueProperty().addListener((obs, o, n)->{
+            double vol = new Double(soundSlider.getValue()) /100;
+            screenManager.setVolume(Math.floor(vol * 100) / 100);
+        });
+
+
     }
 
 
