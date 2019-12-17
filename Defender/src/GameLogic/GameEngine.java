@@ -13,7 +13,7 @@ public class GameEngine {
 
     public GameEngine (){
         inputManager = new InputManager();
-        soundManager = new SoundManager("/Defender/src/GUI/resources/robotmusic.wav");
+        soundManager = new SoundManager();
         highScoreManager = new HighScoreManager();
         mapManager = new MapManager();
     }
@@ -34,9 +34,9 @@ public class GameEngine {
         return inputManager;
     }
 
-    public void openMusic() { soundManager.playSound(); }
-
-    public void setVolume(double vol) { soundManager.setVolume(vol);}
+    public SoundManager getSoundManager() {
+        return soundManager;
+    }
 
     public HighScoreManager getHighScoreManager() {
         return highScoreManager;

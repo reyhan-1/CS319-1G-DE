@@ -1,13 +1,16 @@
 package GUI;
 
-
 import GameLogic.*;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.stage.Popup;
+import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class ScreenManager {
     private Pane mainPane;
@@ -54,7 +57,6 @@ public class ScreenManager {
         return gameEngine.getShip();
     }
 
-
     public ArrayList<Bullet> getBulletsListS() {
         return gameEngine.getBulletsListS();
     }
@@ -79,15 +81,9 @@ public class ScreenManager {
         return mainScene;
     }
 
-    public void setVolume(double vol) { gameEngine.setVolume(vol);}
-//    public int getShipPosX(){
-//        return gameEngine.getShipPosX();
-//
-//    }
-
-//    public GameEngine getGameEngine() {
-//        return gameEngine;
-//    }
+    public GameEngine getGameEngine() {
+        return gameEngine;
+    }
 
     public void changeTheme(){
         sGamePanel.changeTheme();
@@ -133,13 +129,7 @@ public class ScreenManager {
     }
 
     public void viewHelp(){
-        Popup popup = new Popup();
-        popup.setX( 300);
-        popup.setY( 200);
-        HelpMenuPanel helpMenuPanel = new HelpMenuPanel( this);
-        popup.getContent().add( helpMenuPanel);
 
-        popup.show(mainStage);
     }
 
     public void viewHighScores(){

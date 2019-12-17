@@ -1,21 +1,20 @@
 package GUI;
 
-import GameLogic.Bullet;
-import GameLogic.Enemy;
-import GameLogic.GameCharacter;
-import GameLogic.Ship;
+import GameLogic.*;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class GamePanel extends Pane {
     private ScreenManager screenManager;
@@ -26,21 +25,22 @@ public class GamePanel extends Pane {
         screenManager = sm;
         theme = true; // adjust default theme to night
         // arrange default background
-
-        Image backgroundImageNight = new Image("GUI/resources/mapbg2.png", 3200,
+        Image backgroundImageNight = new Image("GUI/resources/night_theme.jpg", 3200,
                 600, true, true);
+        background = new BackgroundImage( backgroundImageNight, BackgroundRepeat.REPEAT,
+                BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
+        // arrange day theme background
         Image backgroundImageDay = new Image("GUI/resources/day_theme.jpg", 3200,
                 600, true, true);
+        backgroundDay = new BackgroundImage( backgroundImageDay, BackgroundRepeat.REPEAT,
+                BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
 
-        // imagePortion stands for the displayed 800*600 rectangle on the screen
-        ImageView iv = new ImageView( backgroundImageNight);
-        Rectangle2D imagePortion = new Rectangle2D(0, 0, 800, 600);
-        // using setViewport, we can change the displayed rectangle
-        iv.setViewport( imagePortion);
-        this.getChildren().add( iv);
+        this.setMinSize(800,600);
+        // set background to default
+        this.setBackground(new Background(background));
 
         // add the ship
-        Ship ship = screenManager.addShip( 0, 400, 300);
+        Ship ship = screenManager.addShip( 0, 300, 300);
         // adjust ship's graphical attributes
         ship.getImageView().setLayoutX( screenManager.getShip().getPosX());
         ship.getImageView().setLayoutY( screenManager.getShip().getPosY());
@@ -85,7 +85,8 @@ public class GamePanel extends Pane {
                         else{
                             enemy.move( 0, (-2)*(i + 1));
                         }
-                        enemy.getImageView().setLayoutX( enemy.getPosX() - iv.getViewport().getMinX());
+
+                        enemy.getImageView().setLayoutX( enemy.getPosX());
                         enemy.getImageView().setLayoutY( enemy.getPosY());
 
                     }
@@ -102,12 +103,11 @@ public class GamePanel extends Pane {
                     Bullet bullet = screenManager.getBulletsListS().get(i);
                     // move the bullet behind the scenes
                     bullet.move(bullet.getDirection() * 10, 0);
-                    bullet.getImageView().setLayoutX( bullet.getPosX()- iv.getViewport().getMinX());
+                    bullet.getImageView().setLayoutX( bullet.getPosX());
                     bullet.getImageView().setLayoutY( bullet.getPosY());
-                    // if the bullet is beyond the map, remove it from the list and the GamePanel
-                    if ( bullet.getPosX() > 3200 || bullet.getPosX() < 0){
+                    // if the bullet is beyond the map, remove it from the list
+                    if ( bullet.getPosX() > 800){
                         screenManager.getBulletsListS().remove( bullet);
-                        GamePanel.this.getChildren().remove( bullet.getImageView());
                     }
                 }
             }
@@ -155,61 +155,15 @@ public class GamePanel extends Pane {
         screenManager.getMainScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                // when the ship moves to the right in the gameEngine,
-                // the displayed map image moves as well.
-                // the ship is always able to move,
-                // we only change what the user can see.
                 if ( event.getCode() == KeyCode.RIGHT){
                     ship.getImageView().setScaleX( 1); // rotates image to the right
-                    if ( ship.getPosX() < 3200) {
-                        // gameEngine
-                        screenManager.getShip().move(10, 0);
-                        // anything below is gui-related
-                        if ( ship.getPosX() > 400) {
-                            if (ship.getPosX() < 2800) {
-                                // if the ship moves right when between 400 and 2800
-                                // -400 below is to display the ship in center
-                                Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0, 800, 600);
-                                iv.setViewport( activeMap);
-                            }
-                            else {
-                                // if the ship moves right when between 2800 and 3200
-                                Rectangle2D activeMap = new Rectangle2D(2400, 0, 800, 600);
-                                iv.setViewport(activeMap);
-                                // iv.getViewport().getMinX() is used frequently
-                                // it's value is the starting x of the displayed map portion
-                                // when the ship is at the final 800*600 area, this value becomes 2400
-                                // subtracting this value from ship's actual position gives the
-                                // ship's relative position on the screen
-                                ship.getImageView().setLayoutX(screenManager.getShip().getPosX() - iv.getViewport().getMinX());
-                            }
-                        }
-                        else{
-                            // if the ship moves right when between 0 and 400
-                            ship.getImageView().setLayoutX(screenManager.getShip().getPosX());
-                        }
-                    }
+                    screenManager.getShip().move( 10, 0);
+                    ship.getImageView().setLayoutX( screenManager.getShip().getPosX());
                 }
-                // the below code is explained in its counterpart, KeyCode.RIGHT
                 if ( event.getCode() == KeyCode.LEFT){
                     ship.getImageView().setScaleX( -1); // rotates image to the left
-                    if ( ship.getPosX() > 0) {
-                        screenManager.getShip().move(-10, 0);
-                        if ( ship.getPosX() < 2800) {
-                            if (ship.getPosX() > 400) {
-                                Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0, 800, 600);
-                                iv.setViewport( activeMap);
-                            }
-                            else {
-                                Rectangle2D activeMap = new Rectangle2D(0, 0, 800, 600);
-                                iv.setViewport( activeMap);
-                                ship.getImageView().setLayoutX(screenManager.getShip().getPosX());
-                            }
-                        }
-                        else {
-                            ship.getImageView().setLayoutX(screenManager.getShip().getPosX() - iv.getViewport().getMinX());
-                        }
-                    }
+                    screenManager.getShip().move( -10, 0);
+                    ship.getImageView().setLayoutX( screenManager.getShip().getPosX());
                 }
                 if ( event.getCode() == KeyCode.UP){
                     screenManager.getShip().move( 0, -10);
@@ -252,18 +206,5 @@ public class GamePanel extends Pane {
             this.setBackground(new Background(background));
             theme = true;
         }
-    }
-
-    public void viewHelp(){
-        if (theme == true){
-            this.setBackground(new Background(backgroundDay));
-            theme = false;
-        }
-        else {
-            this.setBackground(new Background(background));
-            theme = true;
-        }
-
-
     }
 }
