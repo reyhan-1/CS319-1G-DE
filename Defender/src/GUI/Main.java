@@ -11,8 +11,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         GameEngine gameEngine = new GameEngine();
         ScreenManager screenManager = new ScreenManager(gameEngine);
-        //gameEngine.openMusic();
-        //gameEngine.setVolume(0.30);
+        gameEngine.openMusic();
+        gameEngine.setVolume(0.30);
         primaryStage = screenManager.getMainStage();
         primaryStage.setTitle("Defender");
         primaryStage.show();

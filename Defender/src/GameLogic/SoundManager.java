@@ -1,14 +1,14 @@
 package GameLogic;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import java.io.File;
-import java.io.IOException;
 
 public class SoundManager {
     private File file;
     private Clip clip;
-    private AudioInputStream stream;
-    private double vol;
 
     public SoundManager(String path){
         String musicPath = System.getProperty("user.dir") + path;
@@ -16,18 +16,7 @@ public class SoundManager {
         if(!file.exists()){
             System.out.println("Audio file not found");
         }
-        stream = getAudioStream();
-        try {
-            clip = AudioSystem.getClip();
-            clip.open(stream);
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
-
-
 
     public AudioInputStream getAudioStream(){
         try{
@@ -40,16 +29,22 @@ public class SoundManager {
 
 
     public void playSound(){
-        clip.start();
+        try{
+
+            AudioInputStream stream  = getAudioStream();
+            clip = AudioSystem.getClip();
+
+            clip.open(stream);
+            clip.start();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void setVolume(double volume){
         FloatControl gain = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
         float dB = (float) (Math.log(volume) / Math.log(10) * 20);
-        vol = volume;
         gain.setValue(dB);
-    }
-    public double getVolume() {
-        return vol;
+
     }
 }

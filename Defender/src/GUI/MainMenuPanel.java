@@ -18,15 +18,6 @@ public class MainMenuPanel extends Pane {
     private Button helpButton;
     private Button highScoresButton;
     private Button exitButton;
-
-    public Slider getSoundSlider() {
-        return soundSlider;
-    }
-
-    public void setSoundSlider(Slider soundSlider) {
-        this.soundSlider = soundSlider;
-    }
-
     private Slider soundSlider;
     private ScreenManager screenManager;
 
@@ -46,9 +37,7 @@ public class MainMenuPanel extends Pane {
         helpButton = new Button("Help");
         highScoresButton = new Button("High \nScores");
         exitButton = new Button("Exit");
-        
-        double volume = screenManager1.getGameEngine().getVolume();
-        soundSlider = new Slider(0, 100, volume * 100);
+        soundSlider = new Slider(0, 100, 50);
         Image soundImage = new Image("GUI/resources/sound3.png", 50, 50, false, true);
         ImageView soundImageView = new ImageView(soundImage);
         GridPane soundSliderWithImage = new GridPane();
