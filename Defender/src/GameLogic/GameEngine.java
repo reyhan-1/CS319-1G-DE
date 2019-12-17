@@ -8,6 +8,11 @@ public class GameEngine {
     private InputManager inputManager;
     private SoundManager soundManager;
     private HighScoreManager highScoreManager;
+
+    public void setMapManager(MapManager mapManager) {
+        this.mapManager = mapManager;
+    }
+
     private MapManager mapManager;
     private ScreenManager screenManager;
 
@@ -37,6 +42,8 @@ public class GameEngine {
     public void openMusic() { soundManager.playSound(); }
 
     public void setVolume(double vol) { soundManager.setVolume(vol);}
+
+    public double getVolume() { return soundManager.getVolume();}
 
     public HighScoreManager getHighScoreManager() {
         return highScoreManager;

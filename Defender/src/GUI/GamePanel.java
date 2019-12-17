@@ -11,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -20,24 +18,27 @@ import java.util.ArrayList;
 public class GamePanel extends Pane {
     private ScreenManager screenManager;
     private boolean theme; // true is night, false is day
-    private BackgroundImage background, backgroundDay;
+    private Image backgroundImageDay, backgroundImageNight;
+    private ImageView backgroundIV;
+    private AnimationTimer collisionAnimator, enemyAnimator, bulletAnimator;
+    private EventHandler<KeyEvent> keyHandler;
 
     public GamePanel(ScreenManager sm) throws InterruptedException {
         screenManager = sm;
         theme = true; // adjust default theme to night
         // arrange default background
 
-        Image backgroundImageNight = new Image("GUI/resources/mapbg2.png", 3200,
+        backgroundImageNight = new Image("GUI/resources/mapbg2.png", 3200,
                 600, true, true);
-        Image backgroundImageDay = new Image("GUI/resources/day_theme.jpg", 3200,
+        backgroundImageDay = new Image("GUI/resources/mapbgday.png", 3200,
                 600, true, true);
 
         // imagePortion stands for the displayed 800*600 rectangle on the screen
-        ImageView iv = new ImageView( backgroundImageNight);
+        backgroundIV = new ImageView( backgroundImageNight);
         Rectangle2D imagePortion = new Rectangle2D(0, 0, 800, 600);
         // using setViewport, we can change the displayed rectangle
-        iv.setViewport( imagePortion);
-        this.getChildren().add( iv);
+        backgroundIV.setViewport( imagePortion);
+        this.getChildren().add( backgroundIV);
 
         // add the ship
         Ship ship = screenManager.addShip( 0, 400, 300);
@@ -55,9 +56,8 @@ public class GamePanel extends Pane {
             enemy.getImageView().setLayoutY( enemy.getPosY());
             this.getChildren().add(enemy.getImageView());
         }
-
         // animation for bullet movement and collision checking
-        AnimationTimer enemyAnimator = new AnimationTimer() {
+        enemyAnimator = new AnimationTimer() {
             private long time;
             @Override
             public void handle(long now) {
@@ -85,7 +85,7 @@ public class GamePanel extends Pane {
                         else{
                             enemy.move( 0, (-2)*(i + 1));
                         }
-                        enemy.getImageView().setLayoutX( enemy.getPosX() - iv.getViewport().getMinX());
+                        enemy.getImageView().setLayoutX( enemy.getPosX() - backgroundIV.getViewport().getMinX());
                         enemy.getImageView().setLayoutY( enemy.getPosY());
 
                     }
@@ -94,7 +94,7 @@ public class GamePanel extends Pane {
             }
         };
 
-        AnimationTimer bulletAnimator = new AnimationTimer() {
+        bulletAnimator = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 for ( int i = 0; i < screenManager.getBulletsListS().size(); i++){
@@ -102,7 +102,7 @@ public class GamePanel extends Pane {
                     Bullet bullet = screenManager.getBulletsListS().get(i);
                     // move the bullet behind the scenes
                     bullet.move(bullet.getDirection() * 10, 0);
-                    bullet.getImageView().setLayoutX( bullet.getPosX()- iv.getViewport().getMinX());
+                    bullet.getImageView().setLayoutX( bullet.getPosX()- backgroundIV.getViewport().getMinX());
                     bullet.getImageView().setLayoutY( bullet.getPosY());
                     // if the bullet is beyond the map, remove it from the list and the GamePanel
                     if ( bullet.getPosX() > 3200 || bullet.getPosX() < 0){
@@ -113,7 +113,7 @@ public class GamePanel extends Pane {
             }
         };
 
-        AnimationTimer collisionAnimator = new AnimationTimer()
+        collisionAnimator = new AnimationTimer()
         {
             @Override
             public void handle(long arg0)
@@ -151,8 +151,12 @@ public class GamePanel extends Pane {
         bulletAnimator.start();
         collisionAnimator.start();
 
+
+
         // input management
-        screenManager.getMainScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+
+        keyHandler = new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 // when the ship moves to the right in the gameEngine,
@@ -170,18 +174,18 @@ public class GamePanel extends Pane {
                                 // if the ship moves right when between 400 and 2800
                                 // -400 below is to display the ship in center
                                 Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0, 800, 600);
-                                iv.setViewport( activeMap);
+                                backgroundIV.setViewport( activeMap);
                             }
                             else {
                                 // if the ship moves right when between 2800 and 3200
                                 Rectangle2D activeMap = new Rectangle2D(2400, 0, 800, 600);
-                                iv.setViewport(activeMap);
+                                backgroundIV.setViewport(activeMap);
                                 // iv.getViewport().getMinX() is used frequently
                                 // it's value is the starting x of the displayed map portion
                                 // when the ship is at the final 800*600 area, this value becomes 2400
                                 // subtracting this value from ship's actual position gives the
                                 // ship's relative position on the screen
-                                ship.getImageView().setLayoutX(screenManager.getShip().getPosX() - iv.getViewport().getMinX());
+                                ship.getImageView().setLayoutX(screenManager.getShip().getPosX() - backgroundIV.getViewport().getMinX());
                             }
                         }
                         else{
@@ -198,20 +202,21 @@ public class GamePanel extends Pane {
                         if ( ship.getPosX() < 2800) {
                             if (ship.getPosX() > 400) {
                                 Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0, 800, 600);
-                                iv.setViewport( activeMap);
+                                backgroundIV.setViewport( activeMap);
                             }
                             else {
                                 Rectangle2D activeMap = new Rectangle2D(0, 0, 800, 600);
-                                iv.setViewport( activeMap);
+                                backgroundIV.setViewport( activeMap);
                                 ship.getImageView().setLayoutX(screenManager.getShip().getPosX());
                             }
                         }
                         else {
-                            ship.getImageView().setLayoutX(screenManager.getShip().getPosX() - iv.getViewport().getMinX());
+                            ship.getImageView().setLayoutX(screenManager.getShip().getPosX() - backgroundIV.getViewport().getMinX());
                         }
                     }
                 }
                 if ( event.getCode() == KeyCode.UP){
+                    System.out.println( "x");
                     screenManager.getShip().move( 0, -10);
                     ship.getImageView().setLayoutY( screenManager.getShip().getPosY());
                 }
@@ -240,30 +245,30 @@ public class GamePanel extends Pane {
                     screenManager.viewPauseMenu();
                 }
             }
-        });
-
+        };
+        screenManager.getMainScene().addEventHandler(KeyEvent.KEY_PRESSED, keyHandler);
     }
+
+
+
     public void changeTheme(){
         if (theme == true){
-            this.setBackground(new Background(backgroundDay));
+            backgroundIV.setImage( backgroundImageDay);
             theme = false;
         }
         else {
-            this.setBackground(new Background(background));
+            backgroundIV.setImage( backgroundImageNight);
             theme = true;
         }
     }
 
-    public void viewHelp(){
-        if (theme == true){
-            this.setBackground(new Background(backgroundDay));
-            theme = false;
-        }
-        else {
-            this.setBackground(new Background(background));
-            theme = true;
-        }
+    public void removeKeyHandler(){
+        screenManager.getMainScene().removeEventHandler( KeyEvent.KEY_PRESSED, keyHandler);
+    }
 
-
+    public void stopAnimations(){
+        enemyAnimator.stop();
+        bulletAnimator.stop();
+        collisionAnimator.stop();
     }
 }
