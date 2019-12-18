@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -10,6 +11,8 @@ public class HighScoresPanel extends Pane {
     private Label titleLabel;
     private Label hallOfFame;
     private Label scores;
+    private Button ok;
+
     public HighScoresPanel(ScreenManager sm) throws InterruptedException{
         screenManager = sm;
         this.setPrefSize(800,600);
@@ -41,8 +44,18 @@ public class HighScoresPanel extends Pane {
         scores.setPrefSize( 700, 300);
         scores.setLayoutX( 250);
         scores.setLayoutY( 75);
+
+        //to go back to main menu
+        ok = new Button("OK");
+        ok.setFont( hallFont);
+        ok.setStyle("-fx-text-fill: yellow");
+        ok.setPrefSize( 100, 50);
+        ok.setLayoutX( 600);
+        ok.setLayoutY( 15);
+        ok.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
+
         this.setBackground(new Background(background));
-        this.getChildren().addAll( titleLabel, hallOfFame, scores);
+        this.getChildren().addAll( titleLabel, hallOfFame, scores, ok);
     }
 
     public void setScores(String label){
