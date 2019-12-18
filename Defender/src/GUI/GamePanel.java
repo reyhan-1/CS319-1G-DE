@@ -50,8 +50,8 @@ public class GamePanel extends Pane {
         this.getChildren().add(ship.getImageView());
 
         // add enemies
-        for ( int i = 150; i < 350; i = i + 50){
-            Enemy enemy = screenManager.addEnemy( 0, 600, i);
+        for ( int i = 0; i < 4; i++){
+            Enemy enemy = screenManager.addEnemy( 0, (int)(Math.random()*700) + 50, (int)(Math.random()*500)+50);
             enemy.getImageView().setLayoutX( enemy.getPosX());
             enemy.getImageView().setLayoutY( enemy.getPosY());
             this.getChildren().add(enemy.getImageView());
