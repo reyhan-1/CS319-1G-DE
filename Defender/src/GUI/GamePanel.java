@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class GamePanel extends Pane {
     private ScreenManager screenManager;
     private boolean theme; // true is night, false is day
-    private BackgroundImage background, backgroundDay;
+    private BackgroundImage backgroundImageNight, backgroundImageDay;
 
     public GamePanel(ScreenManager sm) throws InterruptedException {
         screenManager = sm;
@@ -245,22 +245,22 @@ public class GamePanel extends Pane {
     }
     public void changeTheme(){
         if (theme == true){
-            this.setBackground(new Background(backgroundDay));
+            this.setBackground(new Background(backgroundImageDay));
             theme = false;
         }
         else {
-            this.setBackground(new Background(background));
+            this.setBackground(new Background(backgroundImageNight));
             theme = true;
         }
     }
 
     public void viewHelp(){
         if (theme == true){
-            this.setBackground(new Background(backgroundDay));
+            this.setBackground(new Background(backgroundImageDay));
             theme = false;
         }
         else {
-            this.setBackground(new Background(background));
+            this.setBackground(new Background(backgroundImageNight));
             theme = true;
         }
 

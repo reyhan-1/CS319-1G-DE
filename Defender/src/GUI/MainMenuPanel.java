@@ -97,6 +97,12 @@ public class MainMenuPanel extends Pane {
             screenManager.setVolume(Math.floor(vol * 100) / 100);
         });
 
+        highScoresButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                screenManager.viewHighScores();
+            }
+        });
     }
 
 }
