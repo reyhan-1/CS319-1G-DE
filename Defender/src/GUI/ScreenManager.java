@@ -20,7 +20,7 @@ public class ScreenManager {
     private GamePanelGroup gamePanelGroup;
 
     private MainMenuPanel mainMenuPanel;
-    private Popup popupPause, popupHelp;
+    private Popup popupPause, popupHelp, gameOver;
 
     public ScreenManager(GameEngine gameEngine1){
         mainPane = new Pane();
@@ -29,6 +29,7 @@ public class ScreenManager {
         gameEngine = gameEngine1;
         popupPause = new Popup();
         popupHelp = new Popup();
+        gameOver = new Popup();
         mainStage.setScene( mainScene);
         gameEngine.openMusic();
         gameEngine.setVolume( 0.30);
@@ -177,6 +178,15 @@ public class ScreenManager {
 
         mainPane.getChildren().clear();
         mainPane.getChildren().add( enemiesPanel);
+    }
+    public void viewGameOver(){
+        gameOver.setX( 300);
+        gameOver.setY( 200);
+        GameOverPanel gameOverPanel = new GameOverPanel(this);
+        gameOver.getContent().add( gameOverPanel);
+
+        gameOver.show(mainStage);
+
     }
 
     public void viewHelp(){

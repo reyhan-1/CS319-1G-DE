@@ -149,6 +149,7 @@ public class GamePanel extends Pane {
                     GameCharacter gc = toDestroyList.get(i);
                     ImageView gcImageView = gc.getImageView();
                     GamePanel.this.getChildren().remove( gcImageView);
+                    screenManager.viewGameOver();
                 }
             }
         };
