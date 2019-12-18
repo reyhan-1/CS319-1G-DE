@@ -5,14 +5,12 @@ import GUI.ScreenManager;
 import java.util.ArrayList;
 
 public class GameEngine {
-    private InputManager inputManager;
     private SoundManager soundManager;
     private HighScoreManager highScoreManager;
     private MapManager mapManager;
     private ScreenManager screenManager;
 
     public GameEngine (){
-        inputManager = new InputManager();
         soundManager = new SoundManager("/Defender/src/GUI/resources/robotmusic.wav");
         highScoreManager = new HighScoreManager();
         mapManager = new MapManager();
@@ -30,13 +28,23 @@ public class GameEngine {
         return mapManager.addBullet( id, x, y, dir, owner);
     }
 
-    public InputManager getInputManager() {
-        return inputManager;
+    public void addScore( int s){
+        mapManager.addScore( s);
+    }
+
+    public int getScore(){
+        return mapManager.getScore();
+    }
+
+    public void setMapManager(MapManager mapManager) {
+        this.mapManager = mapManager;
     }
 
     public void openMusic() { soundManager.playSound(); }
 
     public void setVolume(double vol) { soundManager.setVolume(vol);}
+
+    public double getVolume() { return soundManager.getVolume();}
 
     public HighScoreManager getHighScoreManager() {
         return highScoreManager;

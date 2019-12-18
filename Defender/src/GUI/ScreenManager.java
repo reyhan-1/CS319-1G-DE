@@ -14,14 +14,32 @@ public class ScreenManager {
     private Scene mainScene;
     private Stage mainStage;
     private GameEngine gameEngine;
-    private GamePanel sGamePanel;
 
-    public ScreenManager( GameEngine gameEngine1){
+    private GamePanel gamePanel;
+    private MiniGamePanel miniGamePanel;
+    private GamePanelGroup gamePanelGroup;
+
+    private MainMenuPanel mainMenuPanel;
+    private Popup popupPause, popupHelp;
+
+    public ScreenManager(GameEngine gameEngine1){
         mainPane = new Pane();
         mainScene = new Scene( mainPane, 800, 600);
         mainStage = new Stage();
         gameEngine = gameEngine1;
+        popupPause = new Popup();
+        popupHelp = new Popup();
         mainStage.setScene( mainScene);
+        gameEngine.openMusic();
+        gameEngine.setVolume( 0.30);
+    }
+
+    public GameEngine getGameEngine() {
+        return gameEngine;
+    }
+
+    public MainMenuPanel getMainMenuPanel() {
+        return mainMenuPanel;
     }
 
     public Ship addShip( int id, int x, int y) {
@@ -34,6 +52,18 @@ public class ScreenManager {
 
     public Bullet addBullet( int id, int x, int y, int dir, boolean owner){
         return gameEngine.addBullet( id, x, y, dir, owner);
+    }
+
+    public void addScore( int s){
+        gameEngine.addScore( s);
+    }
+
+    public void updateMiniScore(){
+        getMiniGamePanel().updateMiniScore();
+    }
+
+    public int getScore(){
+        return gameEngine.getScore();
     }
 
     public ArrayList<GameCharacter> checkCollisionB_E(ArrayList<Bullet> list1,
@@ -79,46 +109,62 @@ public class ScreenManager {
         return mainScene;
     }
 
-    public void setVolume(double vol) { gameEngine.setVolume(vol);}
-//    public int getShipPosX(){
-//        return gameEngine.getShipPosX();
-//
-//    }
+    public Pane getMainPane() {
+        return mainPane;
+    }
 
-//    public GameEngine getGameEngine() {
-//        return gameEngine;
-//    }
+    public GamePanel getGamePanel(){
+        return gamePanel;
+    }
+
+    public void setVolume(double vol) {
+        gameEngine.setVolume(vol);
+    }
+
+    public void stopAnimations(){
+        gamePanel.stopAnimations();
+    }
+
+    public void setGameEngine( GameEngine gE) {
+        gameEngine = gE;
+    }
 
     public void changeTheme(){
-        sGamePanel.changeTheme();
+        gamePanel.changeTheme();
     }
 
     public void viewMainMenu(){
-        MainMenuPanel mainMenuPanel = new MainMenuPanel(this);
+        mainMenuPanel = new MainMenuPanel(this);
+        // mainPane.getChildren().clear();
         mainPane.getChildren().add( mainMenuPanel);
     }
 
     public void viewPauseMenu(){
-        Popup popup = new Popup();
-        popup.setX( 300);
-        popup.setY( 200);
+        popupPause.setX( 300);
+        popupPause.setY( 200);
         PauseMenuPanel pauseMenuPanel = new PauseMenuPanel( this);
-        popup.getContent().add( pauseMenuPanel);
+        popupPause.getContent().add( pauseMenuPanel);
 
-        popup.show( mainStage);
+        popupPause.show( mainStage);
 
     }
 
+    public MiniGamePanel getMiniGamePanel(){
+        return miniGamePanel;
+    }
+
     public void viewGame(){
-        GamePanel gamePanel = null;
         try {
-            gamePanel = new GamePanel(this);
+            gamePanel = new GamePanel( this);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        miniGamePanel = new MiniGamePanel( this);
+        gamePanelGroup = new GamePanelGroup( this);
+
         mainPane.getChildren().clear();
-        mainPane.getChildren().add( gamePanel);
-        sGamePanel = gamePanel;
+        mainPane.getChildren().add( gamePanelGroup);
     }
 
     public void viewEnemies(){
@@ -128,18 +174,25 @@ public class ScreenManager {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         mainPane.getChildren().clear();
         mainPane.getChildren().add( enemiesPanel);
     }
 
     public void viewHelp(){
-        Popup popup = new Popup();
-        popup.setX( 300);
-        popup.setY( 200);
+        popupHelp.setX( 300);
+        popupHelp.setY( 200);
         HelpMenuPanel helpMenuPanel = new HelpMenuPanel( this);
-        popup.getContent().add( helpMenuPanel);
+        popupHelp.getContent().add( helpMenuPanel);
 
-        popup.show(mainStage);
+        popupHelp.show(mainStage);
+    }
+    public Popup getPopupHelp(){
+        return popupHelp;
+    }
+
+    public Popup getPopupPause(){
+        return popupPause;
     }
 
     public void viewHighScores(){

@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 public class MapManager {
     private CollisionManager collisionManager;
-    private int width;
-    private int height;
     private Ship ship;
     private ArrayList<Ship> shipsList; // for practical reasons
     private ArrayList<Bullet> bulletsListE, bulletsListS; // separate lists for ship and enemy bullets
     private ArrayList<Enemy> enemiesList;
+    private int waveNo;
+    private int shipLives;
+    private int score;
+    private static final int FINAL_WAVE_NO = 3;
 
     public MapManager(){
         bulletsListE = new ArrayList<Bullet>();
@@ -17,6 +19,36 @@ public class MapManager {
         enemiesList = new ArrayList<Enemy>();
         shipsList = new ArrayList<Ship>();
         collisionManager = new CollisionManager();
+        waveNo = 1;
+        shipLives = 3;
+        score = 0;
+    }
+
+    public int nextWave(){
+        waveNo++;
+        return waveNo;
+    }
+
+    public int getShipLives(){
+        return shipLives;
+    }
+
+    public int getScore(){
+        return score;
+    }
+
+    public void addScore( int s){
+        score = score + s;
+    }
+
+    public boolean checkGameOver(){
+        if ( shipLives == 0){
+            return true;
+        }
+        else if ( waveNo > FINAL_WAVE_NO){
+            return true;
+        }
+        return false;
     }
 
     public Ship addShip(int id, int x, int y) {
