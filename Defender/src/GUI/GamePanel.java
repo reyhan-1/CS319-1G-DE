@@ -28,20 +28,20 @@ public class GamePanel extends Pane {
         theme = true; // adjust default theme to night
         // arrange default background
 
-        backgroundImageNight = new Image("GUI/resources/mapbg2.png", 3200,
-                600, true, true);
-        backgroundImageDay = new Image("GUI/resources/mapbgday.png", 3200,
-                600, true, true);
+        backgroundImageNight = new Image("GUI/resources/darkbg.png", 3200,
+                500, true, true);
+        backgroundImageDay = new Image("GUI/resources/lightbg.png", 3200,
+                500, true, true);
 
         // imagePortion stands for the displayed 800*600 rectangle on the screen
         backgroundIV = new ImageView( backgroundImageNight);
-        Rectangle2D imagePortion = new Rectangle2D(0, 0, 800, 600);
+        Rectangle2D imagePortion = new Rectangle2D(0, 0, 800, 500);
         // using setViewport, we can change the displayed rectangle
         backgroundIV.setViewport( imagePortion);
         this.getChildren().add( backgroundIV);
 
         // add the ship
-        Ship ship = screenManager.addShip( 0, 400, 300);
+        Ship ship = screenManager.addShip( 0, 200, 250);
         // adjust ship's graphical attributes
         ship.getImageView().setLayoutX( screenManager.getShip().getPosX());
         ship.getImageView().setLayoutY( screenManager.getShip().getPosY());
@@ -50,7 +50,7 @@ public class GamePanel extends Pane {
         this.getChildren().add(ship.getImageView());
 
         // add enemies
-        for ( int i = 200; i < 400; i = i + 50){
+        for ( int i = 150; i < 350; i = i + 50){
             Enemy enemy = screenManager.addEnemy( 0, 600, i);
             enemy.getImageView().setLayoutX( enemy.getPosX());
             enemy.getImageView().setLayoutY( enemy.getPosY());
@@ -68,7 +68,7 @@ public class GamePanel extends Pane {
                     {
                         Enemy enemy = screenManager.getEnemiesList().get( i);
                         if ( enemy.getDirection() == 1){
-                            if ( enemy.getPosY() + 50 > 600) {
+                            if ( enemy.getPosY() + 50 > 500) {
                                 enemy.setDirection(0);
                             }
                         }
@@ -131,6 +131,12 @@ public class GamePanel extends Pane {
                 // add characters that will be destroyed into toDestroyList
                 for ( int i = 0; i < toDestroy1.size(); i++){
                     toDestroyList.add( toDestroy1.get( i));
+                    // only half of these iterations will mean an enemy is destroyed,
+                    // other half is for destroyed bullets.
+                    if ( i % 2 == 0) {
+                        screenManager.addScore(10);
+                        screenManager.updateMiniScore();
+                    }
                 }
                 for ( int i = 0; i < toDestroy2.size(); i++){
                     toDestroyList.add( toDestroy2.get( i));
@@ -173,12 +179,13 @@ public class GamePanel extends Pane {
                             if (ship.getPosX() < 2800) {
                                 // if the ship moves right when between 400 and 2800
                                 // -400 below is to display the ship in center
-                                Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0, 800, 600);
+                                Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0,
+                                        800, 500);
                                 backgroundIV.setViewport( activeMap);
                             }
                             else {
                                 // if the ship moves right when between 2800 and 3200
-                                Rectangle2D activeMap = new Rectangle2D(2400, 0, 800, 600);
+                                Rectangle2D activeMap = new Rectangle2D(2400, 0, 800, 500);
                                 backgroundIV.setViewport(activeMap);
                                 // iv.getViewport().getMinX() is used frequently
                                 // it's value is the starting x of the displayed map portion
@@ -201,11 +208,12 @@ public class GamePanel extends Pane {
                         screenManager.getShip().move(-10, 0);
                         if ( ship.getPosX() < 2800) {
                             if (ship.getPosX() > 400) {
-                                Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0, 800, 600);
+                                Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0, 800,
+                                        500);
                                 backgroundIV.setViewport( activeMap);
                             }
                             else {
-                                Rectangle2D activeMap = new Rectangle2D(0, 0, 800, 600);
+                                Rectangle2D activeMap = new Rectangle2D(0, 0, 800, 500);
                                 backgroundIV.setViewport( activeMap);
                                 ship.getImageView().setLayoutX(screenManager.getShip().getPosX());
                             }
@@ -216,13 +224,16 @@ public class GamePanel extends Pane {
                     }
                 }
                 if ( event.getCode() == KeyCode.UP){
-                    System.out.println( "x");
-                    screenManager.getShip().move( 0, -10);
-                    ship.getImageView().setLayoutY( screenManager.getShip().getPosY());
+                    if ( ship.getPosY() > 10) {
+                        screenManager.getShip().move(0, -10);
+                        ship.getImageView().setLayoutY(screenManager.getShip().getPosY());
+                    }
                 }
                 if ( event.getCode() == KeyCode.DOWN){
-                    screenManager.getShip().move( 0, 10);
-                    ship.getImageView().setLayoutY( screenManager.getShip().getPosY());
+                    if ( ship.getPosY() < 470) {
+                        screenManager.getShip().move(0, 10);
+                        ship.getImageView().setLayoutY(screenManager.getShip().getPosY());
+                    }
                 }
                 if ( event.getCode() == KeyCode.SPACE){
                     int direction = (int) ship.getImageView().getScaleX(); // get ship direction

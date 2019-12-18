@@ -13,17 +13,11 @@ public class ScreenManager {
     private Pane mainPane;
     private Scene mainScene;
     private Stage mainStage;
-
-    public GameEngine getGameEngine() {
-        return gameEngine;
-    }
-
     private GameEngine gameEngine;
-    private GamePanel sGamePanel;
 
-    public MainMenuPanel getMainMenuPanel() {
-        return mainMenuPanel;
-    }
+    private GamePanel gamePanel;
+    private MiniGamePanel miniGamePanel;
+    private GamePanelGroup gamePanelGroup;
 
     private MainMenuPanel mainMenuPanel;
     private Popup popupPause, popupHelp;
@@ -40,6 +34,14 @@ public class ScreenManager {
         gameEngine.setVolume( 0.30);
     }
 
+    public GameEngine getGameEngine() {
+        return gameEngine;
+    }
+
+    public MainMenuPanel getMainMenuPanel() {
+        return mainMenuPanel;
+    }
+
     public Ship addShip( int id, int x, int y) {
         return gameEngine.addShip( id, x, y);
     }
@@ -50,6 +52,18 @@ public class ScreenManager {
 
     public Bullet addBullet( int id, int x, int y, int dir, boolean owner){
         return gameEngine.addBullet( id, x, y, dir, owner);
+    }
+
+    public void addScore( int s){
+        gameEngine.addScore( s);
+    }
+
+    public void updateMiniScore(){
+        getMiniGamePanel().updateMiniScore();
+    }
+
+    public int getScore(){
+        return gameEngine.getScore();
     }
 
     public ArrayList<GameCharacter> checkCollisionB_E(ArrayList<Bullet> list1,
@@ -100,7 +114,7 @@ public class ScreenManager {
     }
 
     public GamePanel getGamePanel(){
-        return sGamePanel;
+        return gamePanel;
     }
 
     public void setVolume(double vol) {
@@ -108,7 +122,7 @@ public class ScreenManager {
     }
 
     public void stopAnimations(){
-        sGamePanel.stopAnimations();
+        gamePanel.stopAnimations();
     }
 
     public void setGameEngine( GameEngine gE) {
@@ -116,7 +130,7 @@ public class ScreenManager {
     }
 
     public void changeTheme(){
-        sGamePanel.changeTheme();
+        gamePanel.changeTheme();
     }
 
     public void viewMainMenu(){
@@ -135,17 +149,22 @@ public class ScreenManager {
 
     }
 
+    public MiniGamePanel getMiniGamePanel(){
+        return miniGamePanel;
+    }
+
     public void viewGame(){
-        GamePanel gamePanel = null;
         try {
-            gamePanel = new GamePanel(this);
+            gamePanel = new GamePanel( this);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        sGamePanel = gamePanel;
+
+        miniGamePanel = new MiniGamePanel( this);
+        gamePanelGroup = new GamePanelGroup( this);
 
         mainPane.getChildren().clear();
-        mainPane.getChildren().add( gamePanel);
+        mainPane.getChildren().add( gamePanelGroup);
     }
 
     public void viewEnemies(){
