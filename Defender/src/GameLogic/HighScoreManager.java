@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class HighScoreManager {
+    private String highScoresPath;
     private File highScores;
     private ArrayList<String> names;
     private ArrayList<Integer> scores;
     private String label;
-    public HighScoreManager() {
-        highScores= new File("C:\\Users\\orkan\\Documents\\GitHub\\CS319-1G-DE\\Defender\\src\\Data\\highscores.txt");
+    public HighScoreManager(String path) {
+        highScoresPath = System.getProperty("user.dir") + path;
+        highScores = new File(highScoresPath);
         names = new ArrayList<>();
         scores = new ArrayList<>();
         if( !highScores.exists()){

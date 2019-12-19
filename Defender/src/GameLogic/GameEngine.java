@@ -12,7 +12,7 @@ public class GameEngine {
 
     public GameEngine (){
         soundManager = new SoundManager("/Defender/src/GUI/resources/robotmusic.wav");
-        highScoreManager = new HighScoreManager();
+        highScoreManager = new HighScoreManager("/Defender/src/Data/highscores.txt");
         mapManager = new MapManager();
     }
 
