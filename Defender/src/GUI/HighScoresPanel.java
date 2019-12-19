@@ -1,8 +1,10 @@
 package GUI;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
@@ -53,7 +55,12 @@ public class HighScoresPanel extends Pane {
         ok.setLayoutX( 600);
         ok.setLayoutY( 15);
         ok.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
-
+        ok.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                screenManager.viewMainMenu();
+            }
+        });
         this.setBackground(new Background(background));
         this.getChildren().addAll( titleLabel, hallOfFame, scores, ok);
     }
