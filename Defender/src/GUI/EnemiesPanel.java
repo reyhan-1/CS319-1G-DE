@@ -19,7 +19,7 @@ public class EnemiesPanel extends Pane {
         enemiesImageView.setLayoutY( 0);
         this.setMinSize( 800, 600);
 
-        Button button = new Button ("Continue on to the game");
+        Button button = new Button ("Click here to continue");
         button.setMinSize( 200, 100);
         button.setLayoutX(250);
         button.setLayoutY(500);
