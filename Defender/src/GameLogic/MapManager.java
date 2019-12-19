@@ -24,13 +24,16 @@ public class MapManager {
         score = 0;
     }
 
-    public int nextWave(){
+    public void nextWave(){
         waveNo++;
-        return waveNo;
     }
 
     public int getShipLives(){
         return shipLives;
+    }
+
+    public void decreaseLives(){
+        shipLives--;
     }
 
     public int getScore(){
@@ -39,6 +42,16 @@ public class MapManager {
 
     public void addScore( int s){
         score = score + s;
+    }
+
+    public void createWave(){
+        for ( int i = 0; i < waveNo * 3; i++) {
+            addEnemy( 0, (int)(Math.random()*2800), (int)(Math.random()*500));
+        }
+    }
+
+    public int getWaveNo(){
+        return waveNo;
     }
 
     public boolean checkGameOver(){

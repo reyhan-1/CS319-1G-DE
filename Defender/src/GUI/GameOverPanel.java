@@ -1,6 +1,7 @@
 
 package GUI;
 
+import GameLogic.MapManager;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -71,12 +72,11 @@ public class GameOverPanel extends Pane {
         screenManager.getMainScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 if ( username.getLength() > 0) {
-                    System.out.println("x");
                     // add high score with initials and score variables
+                    screenManager.getGamePanel().stopAnimations();
+                    screenManager.getGamePanel().removeKeyHandler();
+                    screenManager.getGameEngine().setMapManager( new MapManager());
                     screenManager.viewMainMenu();
-                }
-                else{
-                    System.out.println("y");
                 }
             }
         });

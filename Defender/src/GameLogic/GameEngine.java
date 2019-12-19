@@ -16,6 +16,9 @@ public class GameEngine {
         mapManager = new MapManager();
     }
 
+    public void createWave(){
+        mapManager.createWave();
+    }
     public Ship addShip( int id, int x, int y) {
         return mapManager.addShip( id, x, y);
     }
@@ -28,6 +31,21 @@ public class GameEngine {
         return mapManager.addBullet( id, x, y, dir, owner);
     }
 
+    public int getShipLives(){
+        return mapManager.getShipLives();
+    }
+
+    public void decreaseLives(){
+        mapManager.decreaseLives();
+    }
+
+    public void nextWave(){
+        mapManager.nextWave();
+    }
+
+    public int getWave(){
+        return mapManager.getWaveNo();
+    }
     public void addScore( int s){
         mapManager.addScore( s);
     }

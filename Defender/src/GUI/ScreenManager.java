@@ -53,6 +53,14 @@ public class ScreenManager {
         getMiniGamePanel().updateMiniScore();
     }
 
+    public void updateMiniWave(){
+        getMiniGamePanel().updateMiniWave();
+    }
+
+    public void updateMiniLives(){
+        getMiniGamePanel().updateMiniLives();
+    }
+
     public int getScore(){
         return gameEngine.getScore();
     }
@@ -129,6 +137,17 @@ public class ScreenManager {
         return miniGamePanel;
     }
 
+    public void createWave(){
+        gameEngine.createWave();
+    }
+
+    public int getWave(){
+        return gameEngine.getWave();
+    }
+
+    public void nextWave(){
+        gameEngine.nextWave();
+    }
     public void viewGame( boolean resumed){
         if ( resumed){
             gamePanel.startAnimations();
@@ -183,5 +202,13 @@ public class ScreenManager {
         }
         Scene newScene = new Scene( highScoresPanel, 800, 600);
         mainStage.setScene( newScene);
+    }
+
+    public int getShipLives(){
+        return gameEngine.getShipLives();
+    }
+
+    public void decreaseLives(){
+        gameEngine.decreaseLives();
     }
 }

@@ -22,6 +22,7 @@ public class GamePanel extends Pane {
     private ImageView backgroundIV;
     private AnimationTimer collisionAnimator, enemyAnimator, bulletAnimator;
     private EventHandler<KeyEvent> keyHandler;
+    private Ship ship;
 
     public GamePanel(ScreenManager sm) throws InterruptedException {
         screenManager = sm;
@@ -41,7 +42,7 @@ public class GamePanel extends Pane {
         this.getChildren().add( backgroundIV);
 
         // add the ship
-        Ship ship = screenManager.addShip( 0, 200, 250);
+        ship = screenManager.addShip( 0, 200, 250);
         // adjust ship's graphical attributes
         ship.getImageView().setLayoutX( screenManager.getShip().getPosX());
         ship.getImageView().setLayoutY( screenManager.getShip().getPosY());
@@ -50,13 +51,10 @@ public class GamePanel extends Pane {
         this.getChildren().add(ship.getImageView());
 
         // add enemies
-        for ( int i = 0; i < 4; i++){
-            Enemy enemy = screenManager.addEnemy( 0, (int)(Math.random()*3200), (int)(Math.random()*500));
-            enemy.getImageView().setLayoutX( enemy.getPosX());
-            enemy.getImageView().setLayoutY( enemy.getPosY());
-            this.getChildren().add(enemy.getImageView());
-        }
-        // animation for bullet movement and collision checking
+        screenManager.createWave();
+        drawWave();
+
+        // animations for bullet movement and collision checking
         enemyAnimator = new AnimationTimer() {
             private long time;
             @Override
@@ -67,7 +65,7 @@ public class GamePanel extends Pane {
                     for ( int i = 0; i < screenManager.getEnemiesList().size(); i++)
                     {
                         Enemy enemy = screenManager.getEnemiesList().get( i);
-                        if ( enemy.getDirection() == 1){
+                        /*if ( enemy.getDirection() == 1){
                             if ( enemy.getPosY() + 50 > 500) {
                                 enemy.setDirection(0);
                             }
@@ -84,7 +82,8 @@ public class GamePanel extends Pane {
                         }
                         else{
                             enemy.move( 0, (-2)*(i + 1));
-                        }
+                        }*/
+                        enemy.followShip( ship);
                         enemy.getImageView().setLayoutX( enemy.getPosX() - backgroundIV.getViewport().getMinX());
                         enemy.getImageView().setLayoutY( enemy.getPosY());
 
@@ -142,15 +141,47 @@ public class GamePanel extends Pane {
                 for ( int i = 0; i < toDestroy2.size(); i++){
                     toDestroyList.add( toDestroy2.get( i));
                 }
+
                 for ( int i = 0; i < toDestroy3.size(); i++){
                     toDestroyList.add( toDestroy3.get( i));
-                    screenManager.viewGameOver();
+                    if ( i % 2 == 0) { // has to be called only once for each collision
+                        screenManager.decreaseLives();
+                        screenManager.updateMiniLives();
+                        if (screenManager.getShipLives() == 0) {
+                            screenManager.viewGameOver();
+                        } else {
+                            ship = screenManager.addShip(0, 200, 250);
+                            ship.getImageView().setLayoutX( screenManager.getShip().getPosX());
+                            ship.getImageView().setLayoutY( screenManager.getShip().getPosY());
+                            ship.getImageView().setScaleX( 1);
+                            // add ship to the pane
+                            GamePanel.this.getChildren().add(ship.getImageView());
+                            Rectangle2D restartedMap = new Rectangle2D(0, 0, 800, 500);
+                            // using setViewport, we can change the displayed rectangle
+                            backgroundIV.setViewport( restartedMap);
+                        }
+                    }
                 }
 
                 for ( int i = 0; i < toDestroyList.size(); i++){
                     GameCharacter gc = toDestroyList.get(i);
                     ImageView gcImageView = gc.getImageView();
                     GamePanel.this.getChildren().remove( gcImageView);
+                }
+
+
+                System.out.println( screenManager.getEnemiesList().size());
+                if ( screenManager.getEnemiesList().size() == 0) {
+                    if ( screenManager.getWave() < 3) {
+                        screenManager.nextWave();
+                        screenManager.createWave();
+                        drawWave();
+                        screenManager.updateMiniWave();
+                    }
+                    else{
+                        screenManager.viewGameOver();
+                    }
+
                 }
             }
         };
@@ -272,9 +303,18 @@ public class GamePanel extends Pane {
         }
     }
 
-    /*public void removeKeyHandler(){
+    public void removeKeyHandler(){
         screenManager.getMainScene().removeEventHandler( KeyEvent.KEY_PRESSED, keyHandler);
-    }*/
+    }
+
+    public void drawWave(){
+        for ( int i = 0; i < screenManager.getEnemiesList().size(); i++){
+            Enemy enemy = screenManager.getEnemiesList().get( i);
+            enemy.getImageView().setLayoutX( enemy.getPosX());
+            enemy.getImageView().setLayoutY( enemy.getPosY());
+            this.getChildren().add(enemy.getImageView());
+        }
+    }
 
     public void stopAnimations(){
         enemyAnimator.stop();

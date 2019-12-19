@@ -102,12 +102,10 @@ public class PauseMenuPanel extends Pane {
         quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                //screenManager.getMainPane().getChildren().clear();
-                //screenManager.getPopupPause().hide();
-                //screenManager.stopAnimations();
+                screenManager.getGamePanel().stopAnimations();
+                screenManager.getGamePanel().removeKeyHandler();
                 screenManager.getGameEngine().setMapManager( new MapManager());
                 screenManager.viewMainMenu();
-                //screenManager.getGamePanel().removeKeyHandler();
             }
         });
 
