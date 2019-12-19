@@ -212,9 +212,9 @@ public class ScreenManager {
     public void viewHighScores(){
         HighScoresPanel highScoresPanel = null;
         try {
-            // String scoresLabel = gameEngine.getHighScoreManager().getLabel();
+            String scoresLabel = gameEngine.getHighScoreManager().getLabel();
             highScoresPanel = new HighScoresPanel(this);
-            // highScoresPanel.setScores(scoresLabel);
+            highScoresPanel.setScores(scoresLabel);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
