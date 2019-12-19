@@ -89,6 +89,7 @@ public class GamePanel extends Pane {
 
                     }
                     time = now;
+                    screenManager.updateMiniEnemyCoords();
                 }
             }
         };
@@ -228,6 +229,7 @@ public class GamePanel extends Pane {
                             ship.getImageView().setLayoutX(screenManager.getShip().getPosX());
                         }
                     }
+                    screenManager.updateMiniShipCoords();
                 }
                 // the below code is explained in its counterpart, KeyCode.RIGHT
                 if ( event.getCode() == KeyCode.LEFT){
@@ -250,24 +252,27 @@ public class GamePanel extends Pane {
                             ship.getImageView().setLayoutX(screenManager.getShip().getPosX() - backgroundIV.getViewport().getMinX());
                         }
                     }
+                    screenManager.updateMiniShipCoords();
                 }
                 if ( event.getCode() == KeyCode.UP){
                     if ( ship.getPosY() > 10) {
                         screenManager.getShip().move(0, -10);
                         ship.getImageView().setLayoutY(screenManager.getShip().getPosY());
                     }
+                    screenManager.updateMiniShipCoords();
                 }
                 if ( event.getCode() == KeyCode.DOWN){
                     if ( ship.getPosY() < 470) {
                         screenManager.getShip().move(0, 10);
                         ship.getImageView().setLayoutY(screenManager.getShip().getPosY());
                     }
+                    screenManager.updateMiniShipCoords();
                 }
                 if ( event.getCode() == KeyCode.SPACE){
                     int direction = (int) ship.getImageView().getScaleX(); // get ship direction
                     Bullet bullet;
                     //ImageView bulletImageView = new ImageView( new Image( "GUI/resources/bullet2.png"
-                      //      , 10, 3, false, true));
+                    //      , 10, 3, false, true));
                     // this if-else creates the bullet in ship's direction and with respect to ship's location
                     if ( direction == 1) {
                         bullet = screenManager.addBullet(0, screenManager.getShip().getPosX() + 100,

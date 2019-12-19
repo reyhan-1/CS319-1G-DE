@@ -57,8 +57,16 @@ public class ScreenManager {
         getMiniGamePanel().updateMiniWave();
     }
 
-    public void updateMiniLives(){
+    public void updateMiniLives() {
         getMiniGamePanel().updateMiniLives();
+    }
+
+    public void updateMiniShipCoords(){
+        getMiniGamePanel().updateShipPosition();
+    }
+
+    public void updateMiniEnemyCoords(){
+        getMiniGamePanel().updateEnemyPositions();
     }
 
     public int getScore(){
@@ -66,7 +74,7 @@ public class ScreenManager {
     }
 
     public ArrayList<GameCharacter> checkCollisionB_E(ArrayList<Bullet> list1,
-                                                   ArrayList<Enemy> list2){
+                                                      ArrayList<Enemy> list2){
         return gameEngine.checkCollisionB_E( list1, list2);
     }
 
@@ -113,6 +121,16 @@ public class ScreenManager {
 
     public void setVolume(double vol) {
         gameEngine.setVolume(vol);
+    }
+
+    public int[] getMountains() { return gameEngine.getMountains(); }
+
+    public void stopAnimations(){
+        gamePanel.stopAnimations();
+    }
+
+    public void setGameEngine( GameEngine gE) {
+        gameEngine = gE;
     }
 
     public void changeTheme(){
@@ -203,6 +221,7 @@ public class ScreenManager {
         Scene newScene = new Scene( highScoresPanel, 800, 600);
         mainStage.setScene( newScene);
     }
+
 
     public int getShipLives(){
         return gameEngine.getShipLives();

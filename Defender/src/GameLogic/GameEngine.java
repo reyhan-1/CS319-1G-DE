@@ -54,6 +54,8 @@ public class GameEngine {
         return mapManager.getScore();
     }
 
+    public int[] getMountains() {return mapManager.getMountains();}
+
     public void setMapManager(MapManager mapManager) {
         this.mapManager = mapManager;
     }
@@ -97,15 +99,15 @@ public class GameEngine {
     }
 
     public ArrayList<GameCharacter> checkCollisionB_E(ArrayList<Bullet> list1,
-                                                   ArrayList<Enemy> list2){
+                                                      ArrayList<Enemy> list2){
         return mapManager.checkCollisionB_E( list1, list2);
     }
     public ArrayList<GameCharacter> checkCollisionB_S(ArrayList<Bullet> list1,
-                                                   ArrayList<Ship> list2){
+                                                      ArrayList<Ship> list2){
         return mapManager.checkCollisionB_S( list1, list2);
     }
     public ArrayList<GameCharacter> checkCollisionS_E(ArrayList<Ship> list1,
-                                                   ArrayList<Enemy> list2){
+                                                      ArrayList<Enemy> list2){
         return mapManager.checkCollisionS_E( list1, list2);
     }
 }
