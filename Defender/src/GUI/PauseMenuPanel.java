@@ -3,15 +3,15 @@ package GUI;
 import GameLogic.MapManager;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.stage.Window;
 
 public class PauseMenuPanel extends Pane {
     private ScreenManager screenManager;
@@ -21,24 +21,24 @@ public class PauseMenuPanel extends Pane {
     private Button quitButton;
     private Slider soundSlider;
     private Button continueButton;
+    private Boolean nightBackground;
 
     public PauseMenuPanel(ScreenManager sm){
         screenManager = sm;
 
-        this.setMinSize(200,200);
-        this.setLayoutX( 230);
-        this.setLayoutY( 50);
-
         GridPane mainPane = new GridPane();
         GridPane buttons = new GridPane();
+        mainPane.setPrefSize( 300, 200);
+        mainPane.setLayoutX( 250);
+        mainPane.setLayoutY( 200);
+
+        getStylesheets().add(getClass().getResource("spaceFontGameOver.css").toExternalForm());
 
         pauseLabel = new Label("PAUSED");
-        Font labelFont = new Font( "Arial", 24);
-        pauseLabel.setFont( labelFont);
         pauseLabel.setStyle("-fx-text-fill: yellow");
-        pauseLabel.setPrefSize( 100, 50);
-        pauseLabel.setLayoutX( 70);
-        pauseLabel.setLayoutY( 25);
+        pauseLabel.setPrefSize( 300, 50);
+        pauseLabel.setAlignment( Pos.CENTER);
+
 
         helpButton = new Button("Help");
         themeToggle = new ToggleButton("Change Theme");
@@ -50,52 +50,71 @@ public class PauseMenuPanel extends Pane {
         continueButton.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
 
         buttons.addRow( 0, helpButton, themeToggle, quitButton, continueButton);
-        buttons.setLayoutX( 15);
-        buttons.setLayoutY( 100);
         buttons.setHgap( 10);
         buttons.setVgap( 10);
-        soundSlider = new Slider(0, 100, 50);
-        soundSlider.setPrefSize( 20, 20);
-        soundSlider.setLayoutX( 180);
+        buttons.setAlignment( Pos.CENTER);
+
+        soundSlider = screenManager.getMainMenuPanel().getSoundSlider();
+        soundSlider.setPrefSize( 50, 50);
+        soundSlider.setLayoutX( 740);
         soundSlider.setLayoutY( 0);
 
-        this.getChildren().addAll(pauseLabel, buttons, soundSlider);
+        mainPane.addRow( 0, pauseLabel);
+        mainPane.addRow( 1, buttons);
 
-        this.setBackground( new Background(new BackgroundFill(Color.BLACK,
-                CornerRadii.EMPTY, Insets.EMPTY)));
+        this.getChildren().addAll( mainPane, soundSlider);
+
+        nightBackground = screenManager.getGamePanel().isTheme();
+        if ( nightBackground) {
+            this.setBackground(new Background(new BackgroundFill(Color.BLACK,
+                    CornerRadii.EMPTY, Insets.EMPTY)));
+        }
+        else {
+            this.setBackground(new Background(new BackgroundFill(Color.SKYBLUE,
+                    CornerRadii.EMPTY, Insets.EMPTY)));
+        }
         this.setStyle("-fx-border-color: yellow");
 
         themeToggle.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 screenManager.changeTheme();
+                if ( nightBackground) {
+                    PauseMenuPanel.this.setBackground(new Background(new BackgroundFill(Color.SKYBLUE,
+                            CornerRadii.EMPTY, Insets.EMPTY)));
+                    nightBackground = false;
+                }
+                else{
+                    PauseMenuPanel.this.setBackground( new Background(new BackgroundFill(Color.BLACK,
+                            CornerRadii.EMPTY, Insets.EMPTY)));
+                    nightBackground = true;
+                }
             }
         });
 
         helpButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                screenManager.viewHelp();
+                screenManager.viewHelp( false);
             }
         });
 
         quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                screenManager.getMainPane().getChildren().clear();
-                screenManager.getPopupPause().hide();
-                screenManager.stopAnimations();
+                //screenManager.getMainPane().getChildren().clear();
+                //screenManager.getPopupPause().hide();
+                //screenManager.stopAnimations();
                 screenManager.getGameEngine().setMapManager( new MapManager());
                 screenManager.viewMainMenu();
-                screenManager.getGamePanel().removeKeyHandler();
+                //screenManager.getGamePanel().removeKeyHandler();
             }
         });
 
         continueButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Window stage = continueButton.getScene().getWindow();
-                stage.hide();
+                screenManager.viewGame( true); // game is resumed
             }
         });
 
@@ -107,5 +126,11 @@ public class PauseMenuPanel extends Pane {
 
     }
 
-
+    public void addKeyHandler(){
+        screenManager.getMainScene().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                screenManager.viewGame( true);
+            }
+        });
+    }
 }

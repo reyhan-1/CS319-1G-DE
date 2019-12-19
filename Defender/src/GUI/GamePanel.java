@@ -51,7 +51,7 @@ public class GamePanel extends Pane {
 
         // add enemies
         for ( int i = 0; i < 4; i++){
-            Enemy enemy = screenManager.addEnemy( 0, (int)(Math.random()*700) + 50, (int)(Math.random()*500)+50);
+            Enemy enemy = screenManager.addEnemy( 0, (int)(Math.random()*3200), (int)(Math.random()*500));
             enemy.getImageView().setLayoutX( enemy.getPosX());
             enemy.getImageView().setLayoutY( enemy.getPosY());
             this.getChildren().add(enemy.getImageView());
@@ -105,7 +105,8 @@ public class GamePanel extends Pane {
                     bullet.getImageView().setLayoutX( bullet.getPosX()- backgroundIV.getViewport().getMinX());
                     bullet.getImageView().setLayoutY( bullet.getPosY());
                     // if the bullet is beyond the map, remove it from the list and the GamePanel
-                    if ( bullet.getPosX() > 3200 || bullet.getPosX() < 0){
+                    if ( bullet.getPosX() > backgroundIV.getViewport().getMaxX() ||
+                            bullet.getPosX() < backgroundIV.getViewport().getMinX()){
                         screenManager.getBulletsListS().remove( bullet);
                         GamePanel.this.getChildren().remove( bullet.getImageView());
                     }
@@ -143,29 +144,24 @@ public class GamePanel extends Pane {
                 }
                 for ( int i = 0; i < toDestroy3.size(); i++){
                     toDestroyList.add( toDestroy3.get( i));
+                    screenManager.viewGameOver();
                 }
 
                 for ( int i = 0; i < toDestroyList.size(); i++){
                     GameCharacter gc = toDestroyList.get(i);
                     ImageView gcImageView = gc.getImageView();
                     GamePanel.this.getChildren().remove( gcImageView);
-                    screenManager.viewGameOver();
                 }
             }
         };
 
-        enemyAnimator.start();
-        bulletAnimator.start();
-        collisionAnimator.start();
-
-
+        startAnimations();
 
         // input management
-
-
         keyHandler = new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
+
                 // when the ship moves to the right in the gameEngine,
                 // the displayed map image moves as well.
                 // the ship is always able to move,
@@ -258,10 +254,12 @@ public class GamePanel extends Pane {
                 }
             }
         };
-        screenManager.getMainScene().addEventHandler(KeyEvent.KEY_PRESSED, keyHandler);
     }
 
 
+    public void addHandler(){
+        screenManager.getMainScene().addEventHandler(KeyEvent.KEY_PRESSED, keyHandler);
+    }
 
     public void changeTheme(){
         if (theme == true){
@@ -274,13 +272,23 @@ public class GamePanel extends Pane {
         }
     }
 
-    public void removeKeyHandler(){
+    /*public void removeKeyHandler(){
         screenManager.getMainScene().removeEventHandler( KeyEvent.KEY_PRESSED, keyHandler);
-    }
+    }*/
 
     public void stopAnimations(){
         enemyAnimator.stop();
         bulletAnimator.stop();
         collisionAnimator.stop();
+    }
+
+    public void startAnimations(){
+        enemyAnimator.start();
+        bulletAnimator.start();
+        collisionAnimator.start();
+    }
+
+    public boolean isTheme() {
+        return theme;
     }
 }

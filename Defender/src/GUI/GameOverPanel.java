@@ -2,77 +2,83 @@
 package GUI;
 
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
-import javafx.stage.Window;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
-public class GameOverPanel extends Pane  {
+public class GameOverPanel extends Pane {
     private ScreenManager screenManager;
-    private Label gameOverLabel;
+    private Label gameOverLabel, enterLabel;
     private TextField username;
     private String initials = "";
 
 
 
     public GameOverPanel(ScreenManager sm)
-
     {
         screenManager = sm;
 
-        this.setMinSize(300,200);
-        this.setLayoutX( 230);
-        this.setLayoutY( 50);
+        GridPane mainPane = new GridPane();
+        mainPane.setPrefSize( 600, 200);
+        mainPane.setLayoutX( 100);
+        mainPane.setLayoutY( 200);
+
+        this.setBackground( new Background(new BackgroundFill(Color.BLACK,
+                CornerRadii.EMPTY, Insets.EMPTY)));
+        this.setStyle("-fx-border-color: yellow");
 
         gameOverLabel = new Label("GAME OVER");
-        Font labelFont = new Font( "Arial", 22);
-        gameOverLabel.setFont( labelFont);
         gameOverLabel.setStyle("-fx-text-fill: yellow");
-        gameOverLabel.setLayoutX( 70);
-        gameOverLabel.setLayoutY( 25);
+        mainPane.setHalignment(gameOverLabel, HPos.CENTER);
 
-
-        this.getChildren().add(gameOverLabel);
-
-        Label gameOverLabel = new Label(" Welcome to the hall of fame.\nEnter your initials");
-        gameOverLabel.setFont( labelFont);
-        gameOverLabel.setStyle("-fx-text-fill: yellow");
-        this.getChildren().add(gameOverLabel);
-
-        gameOverLabel.setLayoutX( 30);
-        gameOverLabel.setLayoutY( 70);
-
+        enterLabel = new Label("Enter your initials below:");
+        enterLabel.setStyle("-fx-text-fill: yellow");
+        enterLabel.setAlignment( Pos.CENTER);
 
         username = new TextField();
-        username.setLayoutX( 30);
-        username.setLayoutY( 150);
         username.setEditable(true);
-        username.setFont(new Font( "Arial", 40));
         username.setBackground(Background.EMPTY);
-
         username.setStyle("-fx-text-fill: yellow");
-        this.getChildren().add(username);
+        username.setAlignment( Pos.CENTER);
+
+        getStylesheets().add(getClass().getResource("spaceFontGameOver.css").toExternalForm());
+
+        mainPane.addRow(0, gameOverLabel);
+        mainPane.addRow( 1, enterLabel);
+        mainPane.addRow(2, username);
+        this.getChildren().add( mainPane);
 
         username.setOnKeyTyped(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
-                if(initials.length() < 4){
+                if( username.getLength() < 4){
                     initials += ke.getCharacter();
                 }
-                if(initials.length() == 4){
-                    //open highscore with initals
-                    Window stage = username.getScene().getWindow();
-                    stage.hide();
-                    //sm.viewHighScores(initials.substring());
+                else{
+                    username.setText( username.getText().substring(0, 3));
+                    username.positionCaret( 3);
                 }
-
-
             }
         });
-
     }
 
-
+    public void addKeyHandler(){
+        screenManager.getMainScene().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                if ( username.getLength() > 0) {
+                    System.out.println("x");
+                    // add high score with initials and score variables
+                    screenManager.viewMainMenu();
+                }
+                else{
+                    System.out.println("y");
+                }
+            }
+        });
+    }
 }

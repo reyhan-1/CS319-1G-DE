@@ -11,14 +11,16 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Window;
 
 public class HelpMenuPanel extends Pane {
-    public HelpMenuPanel(ScreenManager sm){
 
-        this.setPrefSize(600,400);
-        this.setLayoutX( 50);
-        this.setLayoutY( 10);
+    private ScreenManager screenManager;
+    private boolean mainHelp;
+
+    public HelpMenuPanel(ScreenManager sm, boolean mH){
+        screenManager = sm;
+        mainHelp = mH;
+        this.setPrefSize(800,600);
 
 
         String[][] helpMenus = {
@@ -54,8 +56,12 @@ public class HelpMenuPanel extends Pane {
         backButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Window stage = backButton.getScene().getWindow();
-                stage.hide();
+                if ( mainHelp == true) {
+                    screenManager.viewMainMenu();
+                }
+                else{
+                    screenManager.viewPauseMenu();
+                }
             }
         });
     }

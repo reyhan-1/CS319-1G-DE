@@ -3,34 +3,24 @@ package GUI;
 
 import GameLogic.*;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class ScreenManager {
-    private Pane mainPane;
-    private Scene mainScene;
     private Stage mainStage;
     private GameEngine gameEngine;
-
     private GamePanel gamePanel;
     private MiniGamePanel miniGamePanel;
     private GamePanelGroup gamePanelGroup;
-
+    private PauseMenuPanel pauseMenuPanel;
+    private Scene gameScene;
     private MainMenuPanel mainMenuPanel;
-    private Popup popupPause, popupHelp, gameOver;
 
     public ScreenManager(GameEngine gameEngine1){
-        mainPane = new Pane();
-        mainScene = new Scene( mainPane, 800, 600);
-        mainStage = new Stage();
         gameEngine = gameEngine1;
-        popupPause = new Popup();
-        popupHelp = new Popup();
-        gameOver = new Popup();
-        mainStage.setScene( mainScene);
+        mainStage = new Stage();
+        viewMainMenu();
         gameEngine.openMusic();
         gameEngine.setVolume( 0.30);
     }
@@ -85,7 +75,6 @@ public class ScreenManager {
         return gameEngine.getShip();
     }
 
-
     public ArrayList<Bullet> getBulletsListS() {
         return gameEngine.getBulletsListS();
     }
@@ -107,11 +96,7 @@ public class ScreenManager {
     }
 
     public Scene getMainScene() {
-        return mainScene;
-    }
-
-    public Pane getMainPane() {
-        return mainPane;
+        return mainStage.getScene();
     }
 
     public GamePanel getGamePanel(){
@@ -122,50 +107,46 @@ public class ScreenManager {
         gameEngine.setVolume(vol);
     }
 
-    public void stopAnimations(){
-        gamePanel.stopAnimations();
-    }
-
-    public void setGameEngine( GameEngine gE) {
-        gameEngine = gE;
-    }
-
     public void changeTheme(){
         gamePanel.changeTheme();
     }
 
     public void viewMainMenu(){
         mainMenuPanel = new MainMenuPanel(this);
-        // mainPane.getChildren().clear();
-        mainPane.getChildren().add( mainMenuPanel);
+        Scene newScene = new Scene( mainMenuPanel, 800, 600);
+        mainStage.setScene( newScene);
     }
 
     public void viewPauseMenu(){
-        popupPause.setX( 300);
-        popupPause.setY( 200);
-        PauseMenuPanel pauseMenuPanel = new PauseMenuPanel( this);
-        popupPause.getContent().add( pauseMenuPanel);
-
-        popupPause.show( mainStage);
-
+        gamePanel.stopAnimations();
+        pauseMenuPanel = new PauseMenuPanel( this);
+        Scene newScene = new Scene( pauseMenuPanel, 800, 600);
+        mainStage.setScene( newScene);
+        pauseMenuPanel.addKeyHandler();
     }
 
     public MiniGamePanel getMiniGamePanel(){
         return miniGamePanel;
     }
 
-    public void viewGame(){
-        try {
-            gamePanel = new GamePanel( this);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public void viewGame( boolean resumed){
+        if ( resumed){
+            gamePanel.startAnimations();
+            mainStage.setScene( gameScene);
         }
+        else {
+            try {
+                gamePanel = new GamePanel(this);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            miniGamePanel = new MiniGamePanel(this);
+            gamePanelGroup = new GamePanelGroup(this);
 
-        miniGamePanel = new MiniGamePanel( this);
-        gamePanelGroup = new GamePanelGroup( this);
-
-        mainPane.getChildren().clear();
-        mainPane.getChildren().add( gamePanelGroup);
+            gameScene = new Scene(gamePanelGroup, 800, 600);
+            mainStage.setScene( gameScene);
+        }
+        gamePanel.addHandler();
     }
 
     public void viewEnemies(){
@@ -175,50 +156,32 @@ public class ScreenManager {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        mainPane.getChildren().clear();
-        mainPane.getChildren().add( enemiesPanel);
+        Scene newScene = new Scene( enemiesPanel, 800, 600);
+        mainStage.setScene( newScene);
     }
     public void viewGameOver(){
-        gameOver.setX( 300);
-        gameOver.setY( 200);
         GameOverPanel gameOverPanel = new GameOverPanel(this);
-        gameOver.getContent().add( gameOverPanel);
-
-        gameOver.show(mainStage);
-
+        Scene newScene = new Scene( gameOverPanel, 800, 600);
+        mainStage.setScene( newScene);
+        gameOverPanel.addKeyHandler();
     }
 
-    public void viewHelp(){
-        popupHelp.setX( 300);
-        popupHelp.setY( 200);
-        HelpMenuPanel helpMenuPanel = new HelpMenuPanel( this);
-        popupHelp.getContent().add( helpMenuPanel);
-
-        popupHelp.show(mainStage);
-    }
-    public Popup getPopupHelp(){
-        return popupHelp;
-    }
-
-    public Popup getPopupPause(){
-        return popupPause;
+    public void viewHelp( boolean mainHelp){
+        HelpMenuPanel helpMenuPanel = new HelpMenuPanel( this, mainHelp);
+        Scene newScene = new Scene( helpMenuPanel, 800, 600);
+        mainStage.setScene( newScene);
     }
 
     public void viewHighScores(){
         HighScoresPanel highScoresPanel = null;
         try {
-            String scoresLabel = gameEngine.getHighScoreManager().getLabel();
+            // String scoresLabel = gameEngine.getHighScoreManager().getLabel();
             highScoresPanel = new HighScoresPanel(this);
-            highScoresPanel.setScores(scoresLabel);
+            // highScoresPanel.setScores(scoresLabel);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        mainPane.getChildren().clear();
-        mainPane.getChildren().add( highScoresPanel);
-    }
-
-    public void viewMiniMap(){
-
+        Scene newScene = new Scene( highScoresPanel, 800, 600);
+        mainStage.setScene( newScene);
     }
 }

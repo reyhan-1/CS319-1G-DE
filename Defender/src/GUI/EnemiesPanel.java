@@ -1,15 +1,12 @@
 package GUI;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-
-import java.util.concurrent.TimeUnit;
 
 public class EnemiesPanel extends Pane {
     public EnemiesPanel( ScreenManager sm) throws InterruptedException {
@@ -34,7 +31,7 @@ public class EnemiesPanel extends Pane {
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                sm.viewGame();
+                sm.viewGame( false);
             }
         });
     }
