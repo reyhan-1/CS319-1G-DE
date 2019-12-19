@@ -1,9 +1,6 @@
 package GUI;
 
-import GameLogic.Bullet;
-import GameLogic.Enemy;
-import GameLogic.GameCharacter;
-import GameLogic.Ship;
+import GameLogic.*;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
@@ -26,6 +23,8 @@ public class GamePanel extends Pane {
     private EventHandler<KeyEvent> keyHandler;
     private Ship ship;
     private Rectangle[] dots;
+    private SoundManager bulletMusic;
+
 
     public GamePanel(ScreenManager sm) throws InterruptedException {
         screenManager = sm;
@@ -283,6 +282,8 @@ public class GamePanel extends Pane {
                     screenManager.updateMiniShipCoords();
                 }
                 if ( event.getCode() == KeyCode.SPACE){
+                    bulletMusic = new SoundManager("/Defender/src/GUI/resources/GunSilencer.wav");
+                    bulletMusic.playSound();
                     int direction = (int) ship.getImageView().getScaleX(); // get ship direction
                     Bullet bullet;
                     //ImageView bulletImageView = new ImageView( new Image( "GUI/resources/bullet2.png"
