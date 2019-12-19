@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class GamePanel extends Pane {
     private AnimationTimer collisionAnimator, enemyAnimator, bulletAnimator;
     private EventHandler<KeyEvent> keyHandler;
     private Ship ship;
+    private Rectangle[] dots;
 
     public GamePanel(ScreenManager sm) throws InterruptedException {
         screenManager = sm;
@@ -53,6 +56,17 @@ public class GamePanel extends Pane {
         // add enemies
         screenManager.createWave();
         drawWave();
+
+
+
+        dots = new Rectangle[3200];
+        int[] mountains = sm.getMountains();
+
+        for (int i = 0; i < 3200; i++){
+            dots[i] = new Rectangle(i, 400- mountains[i], 1, 1);
+            dots[i].setStroke(Color.rgb(255, 153, 51));
+            this.getChildren().add(dots[i]);
+        }
 
         // animations for bullet movement and collision checking
         enemyAnimator = new AnimationTimer() {
