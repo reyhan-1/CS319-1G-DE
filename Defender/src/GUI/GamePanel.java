@@ -24,6 +24,7 @@ public class GamePanel extends Pane {
     private Ship ship;
     private Rectangle[] dots;
     private SoundManager bulletMusic;
+    private  SoundManager collisionWithEnemy;
 
 
     public GamePanel(ScreenManager sm) throws InterruptedException {
@@ -158,6 +159,9 @@ public class GamePanel extends Pane {
 
                 for ( int i = 0; i < toDestroy3.size(); i++){
                     toDestroyList.add( toDestroy3.get( i));
+                    collisionWithEnemy = new SoundManager("/Defender/src/GUI/resources/Collision.wav");
+                    collisionWithEnemy.playSound();
+
                     if ( i % 2 == 0) { // has to be called only once for each collision
                         screenManager.decreaseLives();
                         screenManager.updateMiniLives();
