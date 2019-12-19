@@ -100,8 +100,17 @@ public class MiniGamePanel extends Pane {
 
         int i = 0;
         for (Enemy e : enemiesList){
-            enemies[i].setX(200 + e.getPosX() / 8);
-            enemies[i].setY(e.getPosY() / 6);
+            if (e != null) {
+                if (enemies == null){
+                    enemies = new Rectangle[enemiesList.size() * 100];
+                }
+                if (enemies[i] == null){
+                    enemies[i] = new Rectangle(200 + e.getPosX() / 8, e.getPosY() / 6, 2, 2);
+                    enemies[i].setStroke(Color.RED);
+                }
+                enemies[i].setX(200 + e.getPosX() / 8);
+                enemies[i].setY(e.getPosY() / 6);
+            }
 
             i++;
         }
