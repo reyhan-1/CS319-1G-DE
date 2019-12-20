@@ -10,6 +10,7 @@ public class MapManager {
     private ArrayList<Enemy> enemiesList;
     private int waveNo;
     private int shipLives;
+    private int bombNo;
     private int score;
     private static final int FINAL_WAVE_NO = 3;
     private int[] mountains;
@@ -21,6 +22,7 @@ public class MapManager {
         shipsList = new ArrayList<Ship>();
         collisionManager = new CollisionManager();
         waveNo = 1;
+        bombNo = 3;
         shipLives = 3;
         score = 0;
         mountains = generateRandomMountains(3200);
@@ -77,9 +79,16 @@ public class MapManager {
     public int getShipLives(){
         return shipLives;
     }
+    public int getBombNo(){
+        return bombNo;
+    }
 
     public void decreaseLives(){
         shipLives--;
+    }
+
+    public void decreaseBombNo(){
+        bombNo--;
     }
 
     public int getScore(){

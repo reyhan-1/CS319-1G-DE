@@ -53,6 +53,10 @@ public class ScreenManager {
         getMiniGamePanel().updateMiniScore();
     }
 
+    public void updateBombImage(){
+        getMiniGamePanel().updateBombImage();
+    }
+
     public void updateMiniWave(){
         getMiniGamePanel().updateMiniWave();
     }
@@ -226,8 +230,10 @@ public class ScreenManager {
     public int getShipLives(){
         return gameEngine.getShipLives();
     }
-
-    public void decreaseLives(){
-        gameEngine.decreaseLives();
+    public int getBombNo(){
+        return gameEngine.getBombNo();
     }
+
+    public void decreaseLives(){ gameEngine.decreaseLives(); }
+    public void decreaseBombNo(){ gameEngine.decreaseBombNo(); }
 }

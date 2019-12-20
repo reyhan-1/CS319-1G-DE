@@ -305,7 +305,10 @@ public class GamePanel extends Pane {
                     screenManager.viewPauseMenu();
                 }
 
-                if ( event.getCode() == KeyCode.S){
+
+                if ( event.getCode() == KeyCode.S && screenManager.getBombNo() > 0){
+                    screenManager.decreaseBombNo();
+                    screenManager.updateBombImage();
                     int shipX = ship.getPosX();
                     int minBorder = Math.max(0, shipX - 400);
                     int maxBorder = Math.min(3200, shipX + 400);

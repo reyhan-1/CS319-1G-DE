@@ -34,10 +34,14 @@ public class GameEngine {
     public int getShipLives(){
         return mapManager.getShipLives();
     }
+    public int getBombNo(){
+        return mapManager.getBombNo();
+    }
 
     public void decreaseLives(){
         mapManager.decreaseLives();
     }
+    public void decreaseBombNo(){ mapManager.decreaseBombNo(); }
 
     public void nextWave(){
         mapManager.nextWave();
