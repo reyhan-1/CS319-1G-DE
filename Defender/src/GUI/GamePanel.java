@@ -1,9 +1,6 @@
 package GUI;
 
-import GameLogic.Bullet;
-import GameLogic.Enemy;
-import GameLogic.GameCharacter;
-import GameLogic.Ship;
+import GameLogic.*;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
@@ -26,6 +23,10 @@ public class GamePanel extends Pane {
     private EventHandler<KeyEvent> keyHandler;
     private Ship ship;
     private Rectangle[] dots;
+    private SoundManager bulletMusic;
+    private SoundManager collisionWithEnemy;
+    private int[] mountains;
+
 
     public GamePanel(ScreenManager sm) throws InterruptedException {
         screenManager = sm;
@@ -59,14 +60,9 @@ public class GamePanel extends Pane {
 
 
 
-        dots = new Rectangle[3200];
-        int[] mountains = sm.getMountains();
-
-        for (int i = 0; i < 3200; i++){
-            dots[i] = new Rectangle(i, 400- mountains[i], 1, 1);
-            dots[i].setStroke(Color.rgb(255, 153, 51));
-            this.getChildren().add(dots[i]);
-        }
+        dots = new Rectangle[800];
+        mountains = sm.getMountains();
+        drawDots( 0);
 
         // animations for bullet movement and collision checking
         enemyAnimator = new AnimationTimer() {
@@ -104,6 +100,7 @@ public class GamePanel extends Pane {
                     }
                     time = now;
                     screenManager.updateMiniEnemyCoords();
+                    screenManager.updateMiniShipCoords();
                 }
             }
         };
@@ -159,6 +156,9 @@ public class GamePanel extends Pane {
 
                 for ( int i = 0; i < toDestroy3.size(); i++){
                     toDestroyList.add( toDestroy3.get( i));
+                    collisionWithEnemy = new SoundManager("/Defender/src/GUI/resources/Collision.wav");
+                    collisionWithEnemy.playSound();
+
                     if ( i % 2 == 0) { // has to be called only once for each collision
                         screenManager.decreaseLives();
                         screenManager.updateMiniLives();
@@ -174,6 +174,7 @@ public class GamePanel extends Pane {
                             Rectangle2D restartedMap = new Rectangle2D(0, 0, 800, 500);
                             // using setViewport, we can change the displayed rectangle
                             backgroundIV.setViewport( restartedMap);
+                            drawDots( 0);
                         }
                     }
                 }
@@ -212,9 +213,9 @@ public class GamePanel extends Pane {
                 // we only change what the user can see.
                 if ( event.getCode() == KeyCode.RIGHT){
                     ship.getImageView().setScaleX( 1); // rotates image to the right
-                    if ( ship.getPosX() < 3200) {
+                    if ( ship.getPosX() < 3100) {
                         // gameEngine
-                        screenManager.getShip().move(10, 0);
+                        screenManager.getShip().move(20, 0);
                         // anything below is gui-related
                         if ( ship.getPosX() > 400) {
                             if (ship.getPosX() < 2800) {
@@ -223,6 +224,7 @@ public class GamePanel extends Pane {
                                 Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0,
                                         800, 500);
                                 backgroundIV.setViewport( activeMap);
+                                drawDots( (int) backgroundIV.getViewport().getMinX());
                             }
                             else {
                                 // if the ship moves right when between 2800 and 3200
@@ -234,6 +236,7 @@ public class GamePanel extends Pane {
                                 // subtracting this value from ship's actual position gives the
                                 // ship's relative position on the screen
                                 ship.getImageView().setLayoutX(screenManager.getShip().getPosX() - backgroundIV.getViewport().getMinX());
+                                drawDots( (int) backgroundIV.getViewport().getMinX());
                             }
                         }
                         else{
@@ -241,46 +244,46 @@ public class GamePanel extends Pane {
                             ship.getImageView().setLayoutX(screenManager.getShip().getPosX());
                         }
                     }
-                    screenManager.updateMiniShipCoords();
                 }
                 // the below code is explained in its counterpart, KeyCode.RIGHT
                 if ( event.getCode() == KeyCode.LEFT){
                     ship.getImageView().setScaleX( -1); // rotates image to the left
                     if ( ship.getPosX() > 0) {
-                        screenManager.getShip().move(-10, 0);
+                        screenManager.getShip().move(-20, 0);
                         if ( ship.getPosX() < 2800) {
                             if (ship.getPosX() > 400) {
                                 Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0, 800,
                                         500);
                                 backgroundIV.setViewport( activeMap);
+                                drawDots( (int) backgroundIV.getViewport().getMinX());
                             }
                             else {
                                 Rectangle2D activeMap = new Rectangle2D(0, 0, 800, 500);
                                 backgroundIV.setViewport( activeMap);
                                 ship.getImageView().setLayoutX(screenManager.getShip().getPosX());
+                                drawDots( (int) backgroundIV.getViewport().getMinX());
                             }
                         }
                         else {
                             ship.getImageView().setLayoutX(screenManager.getShip().getPosX() - backgroundIV.getViewport().getMinX());
                         }
                     }
-                    screenManager.updateMiniShipCoords();
                 }
                 if ( event.getCode() == KeyCode.UP){
                     if ( ship.getPosY() > 10) {
                         screenManager.getShip().move(0, -10);
                         ship.getImageView().setLayoutY(screenManager.getShip().getPosY());
                     }
-                    screenManager.updateMiniShipCoords();
                 }
                 if ( event.getCode() == KeyCode.DOWN){
                     if ( ship.getPosY() < 470) {
                         screenManager.getShip().move(0, 10);
                         ship.getImageView().setLayoutY(screenManager.getShip().getPosY());
                     }
-                    screenManager.updateMiniShipCoords();
                 }
                 if ( event.getCode() == KeyCode.SPACE){
+                    bulletMusic = new SoundManager("/Defender/src/GUI/resources/GunSilencer.wav");
+                    bulletMusic.playSound();
                     int direction = (int) ship.getImageView().getScaleX(); // get ship direction
                     Bullet bullet;
                     //ImageView bulletImageView = new ImageView( new Image( "GUI/resources/bullet2.png"
@@ -347,5 +350,17 @@ public class GamePanel extends Pane {
 
     public boolean isTheme() {
         return theme;
+    }
+
+    public void drawDots( int minX){
+        for ( int i = 0; i < 800; i++){
+            this.getChildren().remove( dots[i]);
+        }
+        dots = new Rectangle[800];
+        for (int i = 0; i < 800; i++){
+            dots[i] = new Rectangle( i, 400 - mountains[i + minX], 1, 1);
+            dots[i].setStroke(Color.rgb(255, 153, 51));
+            this.getChildren().add(dots[i]);
+        }
     }
 }

@@ -5,13 +5,13 @@ import GUI.ScreenManager;
 import java.util.ArrayList;
 
 public class GameEngine {
-    private SoundManager soundManager;
+    private SoundManager robotMusic;
     private HighScoreManager highScoreManager;
     private MapManager mapManager;
     private ScreenManager screenManager;
 
     public GameEngine (){
-        soundManager = new SoundManager("/Defender/src/GUI/resources/robotmusic.wav");
+        robotMusic = new SoundManager("/Defender/src/GUI/resources/robotmusic.wav");
         highScoreManager = new HighScoreManager();
         mapManager = new MapManager();
     }
@@ -60,11 +60,12 @@ public class GameEngine {
         this.mapManager = mapManager;
     }
 
-    public void openMusic() { soundManager.playSound(); }
+    public void openMusic() { robotMusic.playSound(); }
 
-    public void setVolume(double vol) { soundManager.setVolume(vol);}
 
-    public double getVolume() { return soundManager.getVolume();}
+    public void setVolume(double vol) { robotMusic.setVolume(vol);}
+
+    public double getVolume() { return robotMusic.getVolume();}
 
     public HighScoreManager getHighScoreManager() {
         return highScoreManager;
