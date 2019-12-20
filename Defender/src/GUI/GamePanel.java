@@ -300,9 +300,30 @@ public class GamePanel extends Pane {
                     }
                     GamePanel.this.getChildren().add(bullet.getImageView());
                 }
+
                 if ( event.getCode() == KeyCode.ESCAPE){
                     screenManager.viewPauseMenu();
                 }
+
+                if ( event.getCode() == KeyCode.S){
+                    int shipX = ship.getPosX();
+                    int minBorder = Math.max(0, shipX - 400);
+                    int maxBorder = Math.min(3200, shipX + 400);
+
+                    ArrayList<Enemy> enemiesList = screenManager.getEnemiesList();
+
+                    for (int i = 0; i < enemiesList.size(); i++){
+                        Enemy e = enemiesList.get(i);
+
+                        if (e.getPosX() > minBorder && e.getPosX() < maxBorder){
+                            getPane().getChildren().remove(e.getImageView());
+                            screenManager.getEnemiesList().remove(e);
+                            i--;
+                        }
+                    }
+
+                }
+
                 if ( event.getCode() == KeyCode.K && ship.getPosX()> 500 && ship.getPosX() < 2700){
 
                     int newx = (int)(Math.random() * 2000);
@@ -334,6 +355,9 @@ public class GamePanel extends Pane {
         };
     }
 
+    public Pane getPane(){
+        return this;
+    }
 
     public void addHandler(){
         screenManager.getMainScene().addEventHandler(KeyEvent.KEY_PRESSED, keyHandler);
