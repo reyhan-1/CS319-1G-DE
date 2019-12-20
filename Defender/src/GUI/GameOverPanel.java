@@ -15,16 +15,17 @@ import javafx.scene.paint.Color;
 
 public class GameOverPanel extends Pane {
     private ScreenManager screenManager;
+    private int currScore;
     private Label gameOverLabel, enterLabel;
     private TextField username;
     private String initials = "";
+    private String toShow = "";
 
 
-
-    public GameOverPanel(ScreenManager sm)
+    public GameOverPanel(ScreenManager sm, int currentScore)
     {
         screenManager = sm;
-
+        currScore = currentScore;
         GridPane mainPane = new GridPane();
         mainPane.setPrefSize( 600, 200);
         mainPane.setLayoutX( 100);
@@ -72,11 +73,12 @@ public class GameOverPanel extends Pane {
         screenManager.getMainScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 if ( username.getLength() > 0) {
+                    screenManager.getGameEngine().getHighScoreManager().addScore(initials, currScore);
                     // add high score with initials and score variables
                     screenManager.getGamePanel().stopAnimations();
                     screenManager.getGamePanel().removeKeyHandler();
                     screenManager.getGameEngine().setMapManager( new MapManager());
-                    screenManager.viewMainMenu();
+                    screenManager.viewHighScores();
                 }
             }
         });

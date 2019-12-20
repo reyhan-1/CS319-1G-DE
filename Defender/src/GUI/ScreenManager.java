@@ -196,8 +196,8 @@ public class ScreenManager {
         Scene newScene = new Scene( enemiesPanel, 800, 600);
         mainStage.setScene( newScene);
     }
-    public void viewGameOver(){
-        GameOverPanel gameOverPanel = new GameOverPanel(this);
+    public void viewGameOver(int currentScore){
+        GameOverPanel gameOverPanel = new GameOverPanel(this, currentScore);
         Scene newScene = new Scene( gameOverPanel, 800, 600);
         mainStage.setScene( newScene);
         gameOverPanel.addKeyHandler();

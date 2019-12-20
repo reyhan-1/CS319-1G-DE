@@ -1,19 +1,16 @@
 package GameLogic;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class HighScoreManager {
-    private String highScoresPath;
+    private String highScoresPath = System.getProperty("user.dir") + "\\Defender\\src\\Data\\highscores.txt";
     private File highScores;
     private ArrayList<String> names;
     private ArrayList<Integer> scores;
     private String label;
-    public HighScoreManager(String path) {
-        highScoresPath = System.getProperty("user.dir") + path;
+    public HighScoreManager() {
+        System.out.println(highScoresPath);
         highScores = new File(highScoresPath);
         names = new ArrayList<>();
         scores = new ArrayList<>();
@@ -76,6 +73,15 @@ public class HighScoreManager {
         names.add(name);
         scores.add(score);
         sortLists();
+        label = setScoresLabel();
+        String toWrite = (name + "|" + score + "\n");
+        System.out.println( "array" + toWrite);
+        try{
+            PrintWriter printWriter = new PrintWriter( new FileWriter( highScores, true));
+            printWriter.append(toWrite);
+            printWriter.close();
+        }
+        catch (IOException ioException){}
     }
 }
 

@@ -163,7 +163,7 @@ public class GamePanel extends Pane {
                         screenManager.decreaseLives();
                         screenManager.updateMiniLives();
                         if (screenManager.getShipLives() == 0) {
-                            screenManager.viewGameOver();
+                            screenManager.viewGameOver(screenManager.getScore());
                         } else {
                             ship = screenManager.addShip(0, 200, 250);
                             ship.getImageView().setLayoutX( screenManager.getShip().getPosX());
@@ -184,8 +184,6 @@ public class GamePanel extends Pane {
                     GamePanel.this.getChildren().remove( gcImageView);
                 }
 
-
-                System.out.println( screenManager.getEnemiesList().size());
                 if ( screenManager.getEnemiesList().size() == 0) {
                     if ( screenManager.getWave() < 3) {
                         screenManager.nextWave();
@@ -194,7 +192,7 @@ public class GamePanel extends Pane {
                         screenManager.updateMiniWave();
                     }
                     else{
-                        screenManager.viewGameOver();
+                        screenManager.viewGameOver(screenManager.getScore());
                     }
 
                 }
