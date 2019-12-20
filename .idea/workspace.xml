@@ -2,22 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42542051-d90c-43e3-861e-52ff39a00f99" name="Default Changelist" comment="Pause menu's quit button now returns to the main menu as intended. ChangeTheme method now works correctly. The bug where the KeyHandler and AnimationTimers of GamePanel were active after returning to MainMenuPanel is fixed. This used to allow the user to open PauseMenuPanel from the MainMenuPanel.">
-      <change afterPath="$PROJECT_DIR$/Defender/src/GUI/resources/Collision.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/EnemiesPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/EnemiesPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/EnemiesPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/EnemiesPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/GamePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/ScreenManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GUI/ScreenManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/Enemy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/GameEngine.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/GameEngine.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/HighScoreManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/HighScoreManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/MapManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/out/production/CS319-1G-DE/GameLogic/MapManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Defender/src/GUI/EnemiesPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GUI/EnemiesPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Defender/src/GUI/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Defender/src/GUI/GamePanel.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +24,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Defender/src/GUI/GameOverPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="57" column="40" lean-forward="true" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
+            <state relative-caret-position="716">
+              <caret line="82" column="13" lean-forward="true" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -46,10 +36,18 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Defender/src/GUI/GamePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="161" column="96" selection-start-line="161" selection-start-column="96" selection-end-line="161" selection-end-column="96" />
+            <state relative-caret-position="76">
+              <caret line="305" column="97" selection-start-line="305" selection-start-column="97" selection-end-line="305" selection-end-column="97" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4030#5126#0" expanded="true" />
+                <element signature="e#5125#5126#0" expanded="true" />
+                <element signature="e#5157#9008#0" expanded="true" />
+                <element signature="e#5336#5351#0" expanded="true" />
+                <element signature="e#9007#9008#0" expanded="true" />
+                <element signature="e#16638#16639#0" expanded="true" />
+                <element signature="e#16732#16733#0" expanded="true" />
+                <element signature="e#17868#17869#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -136,8 +134,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Defender/src/GUI/EnemiesPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="33" column="52" selection-start-line="33" selection-start-column="52" selection-end-line="33" selection-end-column="52" />
+            <state relative-caret-position="180">
+              <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
               <folding>
                 <element signature="e#1465#1466#0" expanded="true" />
                 <element signature="e#1516#1517#0" expanded="true" />
@@ -296,7 +294,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="x" value="308" />
+    <option name="x" value="97" />
     <option name="width" value="1341" />
     <option name="height" value="878" />
   </component>
@@ -347,14 +345,6 @@
               <item name="Defender" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="GUI" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS319-1G-DE" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS319-1G-DE" type="462c0819:PsiDirectoryNode" />
-              <item name="Defender" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="GUI" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -535,7 +525,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20100144" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20100144" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -544,7 +534,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3120482" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2951807" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3994911" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -859,8 +849,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Defender/src/GUI/EnemiesPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="33" column="52" selection-start-line="33" selection-start-column="52" selection-end-line="33" selection-end-column="52" />
+        <state relative-caret-position="180">
+          <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
           <folding>
             <element signature="e#1465#1466#0" expanded="true" />
             <element signature="e#1516#1517#0" expanded="true" />
@@ -892,16 +882,6 @@
             <element signature="e#1002#1003#0" expanded="true" />
             <element signature="e#1036#1037#0" expanded="true" />
             <element signature="e#1078#1079#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Defender/src/GUI/GameOverPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="57" column="40" lean-forward="true" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -946,12 +926,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Defender/src/GUI/GamePanel.java">
+    <entry file="file://$PROJECT_DIR$/Defender/src/GUI/GameOverPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="161" column="96" selection-start-line="161" selection-start-column="96" selection-end-line="161" selection-end-column="96" />
+        <state relative-caret-position="716">
+          <caret line="82" column="13" lean-forward="true" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Defender/src/GUI/GamePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="305" column="97" selection-start-line="305" selection-start-column="97" selection-end-line="305" selection-end-column="97" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4030#5126#0" expanded="true" />
+            <element signature="e#5125#5126#0" expanded="true" />
+            <element signature="e#5157#9008#0" expanded="true" />
+            <element signature="e#5336#5351#0" expanded="true" />
+            <element signature="e#9007#9008#0" expanded="true" />
+            <element signature="e#16638#16639#0" expanded="true" />
+            <element signature="e#16732#16733#0" expanded="true" />
+            <element signature="e#17868#17869#0" expanded="true" />
           </folding>
         </state>
       </provider>

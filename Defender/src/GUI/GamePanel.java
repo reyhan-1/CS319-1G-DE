@@ -303,6 +303,33 @@ public class GamePanel extends Pane {
                 if ( event.getCode() == KeyCode.ESCAPE){
                     screenManager.viewPauseMenu();
                 }
+                if ( event.getCode() == KeyCode.K && ship.getPosX()> 500 && ship.getPosX() < 2700){
+
+                    int newx = (int)(Math.random() * 2000);
+                    int newy = (int)(Math.random() * 200);
+
+                    screenManager.getShip().move(  newx - ship.getPosX(), 0/*Math.abs(ship.getPosY()- newy)*/);
+//                    ship.getImageView().setLayoutY(screenManager.getShip().getPosY());
+//                    ship.getImageView().setLayoutX(screenManager.getShip().getPosX());
+
+                    if ( ship.getPosX() < 2800) {
+                        if (ship.getPosX() > 400) {
+                            Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0, 800,
+                                    500);
+                            backgroundIV.setViewport( activeMap);
+                            drawDots( (int) backgroundIV.getViewport().getMinX());
+                        }
+                        else {
+                            Rectangle2D activeMap = new Rectangle2D(0, 0, 800, 500);
+                            backgroundIV.setViewport( activeMap);
+                            ship.getImageView().setLayoutX(screenManager.getShip().getPosX());
+                            drawDots( (int) backgroundIV.getViewport().getMinX());
+                        }
+                    }
+                    else {
+                        ship.getImageView().setLayoutX(screenManager.getShip().getPosX() - backgroundIV.getViewport().getMinX());
+                    }
+                }
             }
         };
     }
