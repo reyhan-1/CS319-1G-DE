@@ -319,6 +319,8 @@ public class GamePanel extends Pane {
                             getPane().getChildren().remove(e.getImageView());
                             screenManager.getEnemiesList().remove(e);
                             i--;
+                            screenManager.addScore(10);
+                            screenManager.updateMiniScore();
                         }
                     }
 
