@@ -23,7 +23,7 @@ public class GamePanel extends Pane {
     private EventHandler<KeyEvent> keyHandler;
     private Ship ship;
     private Rectangle[] dots;
-    private SoundManager bulletMusic;
+    private SoundManager bulletMusic, HyperjumpMusic, SuperbombMusic;
     private SoundManager collisionWithEnemy;
     private int[] mountains;
 
@@ -307,6 +307,8 @@ public class GamePanel extends Pane {
 
 
                 if ( event.getCode() == KeyCode.S && screenManager.getBombNo() > 0){
+                    SuperbombMusic = new SoundManager("/Defender/src/GUI/resources/Superbomb.wav");
+                    SuperbombMusic.playSound();
                     screenManager.decreaseBombNo();
                     screenManager.updateBombImage();
                     int shipX = ship.getPosX();
@@ -331,6 +333,8 @@ public class GamePanel extends Pane {
 
                 if ( event.getCode() == KeyCode.K && ship.getPosX()> 500 && ship.getPosX() < 2700){
 
+                    HyperjumpMusic = new SoundManager("/Defender/src/GUI/resources/Hyperjump.wav");
+                    HyperjumpMusic.playSound();
                     int newx = (int)(Math.random() * 2000);
                     int newy = (int)(Math.random() * 200);
 
