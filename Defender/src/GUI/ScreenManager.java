@@ -1,77 +1,193 @@
 package GUI;
 
-import GameLogic.GameEngine;
-import GameLogic.Ship;
-import javafx.geometry.Pos;
+
+import GameLogic.*;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
-import javafx.stage.Popup;
-import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
 
 public class ScreenManager {
-    private Pane mainPane;
-    private Scene mainScene;
     private Stage mainStage;
     private GameEngine gameEngine;
-    private GamePanel sGamePanel;
+    private GamePanel gamePanel;
+    private MiniGamePanel miniGamePanel;
+    private GamePanelGroup gamePanelGroup;
+    private PauseMenuPanel pauseMenuPanel;
+    private Scene gameScene;
+    private MainMenuPanel mainMenuPanel;
 
-    public ScreenManager( GameEngine gameEngine1){
-        mainPane = new Pane();
-        mainScene = new Scene( mainPane, 800, 600);
-        mainStage = new Stage();
+    public ScreenManager(GameEngine gameEngine1){
         gameEngine = gameEngine1;
-        mainStage.setScene( mainScene);
+        mainStage = new Stage();
+        viewMainMenu();
+        gameEngine.openMusic();
+        gameEngine.setVolume( 0.30);
+    }
+
+    public GameEngine getGameEngine() {
+        return gameEngine;
+    }
+
+    public MainMenuPanel getMainMenuPanel() {
+        return mainMenuPanel;
+    }
+
+    public Ship addShip( int id, int x, int y) {
+        return gameEngine.addShip( id, x, y);
+    }
+
+    public Enemy addEnemy( int id, int x, int y) {
+        return gameEngine.addEnemy( id, x, y);
+    }
+
+    public Bullet addBullet( int id, int x, int y, int dir, boolean owner){
+        return gameEngine.addBullet( id, x, y, dir, owner);
+    }
+
+    public void addScore( int s){
+        gameEngine.addScore( s);
+    }
+
+    public void updateMiniScore(){
+        getMiniGamePanel().updateMiniScore();
+    }
+
+    public void updateBombImage(){
+        getMiniGamePanel().updateBombImage();
+    }
+
+    public void updateMiniWave(){
+        getMiniGamePanel().updateMiniWave();
+    }
+
+    public void updateMiniLives() {
+        getMiniGamePanel().updateMiniLives();
+    }
+
+    public void updateMiniShipCoords(){
+        getMiniGamePanel().updateShipPosition();
+    }
+
+    public void updateMiniEnemyCoords(){
+        getMiniGamePanel().updateEnemyPositions();
+    }
+
+    public int getScore(){
+        return gameEngine.getScore();
+    }
+
+    public ArrayList<GameCharacter> checkCollisionB_E(ArrayList<Bullet> list1,
+                                                      ArrayList<Enemy> list2){
+        return gameEngine.checkCollisionB_E( list1, list2);
+    }
+
+    public ArrayList<GameCharacter> checkCollisionB_S(ArrayList<Bullet> list1,
+                                                      ArrayList<Ship> list2){
+        return gameEngine.checkCollisionB_S( list1, list2);
+    }
+    public ArrayList<GameCharacter> checkCollisionS_E(ArrayList<Ship> list1,
+                                                      ArrayList<Enemy> list2){
+        return gameEngine.checkCollisionS_E( list1, list2);
+    }
+
+    public Ship getShip(){
+        return gameEngine.getShip();
+    }
+
+    public ArrayList<Bullet> getBulletsListS() {
+        return gameEngine.getBulletsListS();
+    }
+
+    public ArrayList<Bullet> getBulletsListE() {
+        return gameEngine.getBulletsListE();
+    }
+
+    public ArrayList<Ship> getShipsList() {
+        return gameEngine.getShipsList();
+    }
+
+    public ArrayList<Enemy> getEnemiesList() {
+        return gameEngine.getEnemiesList();
     }
 
     public Stage getMainStage(){
         return mainStage;
     }
+
     public Scene getMainScene() {
-        return mainScene;
+        return mainStage.getScene();
     }
 
-    public Ship addShip(String shipName, int x, int y) {
-        return gameEngine.addShip(shipName, x, y);
+    public GamePanel getGamePanel(){
+        return gamePanel;
     }
-    public Ship getShip(){
-        return gameEngine.getShip();
+
+    public void setVolume(double vol) {
+        gameEngine.setVolume(vol);
     }
-    public int getShipPosX(){
-        return gameEngine.getShipPosX();
+
+    public int[] getMountains() { return gameEngine.getMountains(); }
+
+    public void stopAnimations(){
+        gamePanel.stopAnimations();
     }
-    public int getShipPosY(){
-        return gameEngine.getShipPosY();
+
+    public void setGameEngine( GameEngine gE) {
+        gameEngine = gE;
     }
+
+    public void changeTheme(){
+        gamePanel.changeTheme();
+    }
+
     public void viewMainMenu(){
-        MainMenuPanel mainMenuPanel = new MainMenuPanel(this);
-        mainPane.getChildren().add( mainMenuPanel);
+        mainMenuPanel = new MainMenuPanel(this);
+        Scene newScene = new Scene( mainMenuPanel, 800, 600);
+        mainStage.setScene( newScene);
     }
 
     public void viewPauseMenu(){
-        Popup popup = new Popup();
-        popup.setX( 300);
-        popup.setY( 200);
-        PauseMenuPanel pauseMenuPanel = new PauseMenuPanel( this);
-        popup.getContent().add( pauseMenuPanel);
-
-        popup.show( mainStage);
-
+        gamePanel.stopAnimations();
+        pauseMenuPanel = new PauseMenuPanel( this);
+        Scene newScene = new Scene( pauseMenuPanel, 800, 600);
+        mainStage.setScene( newScene);
+        pauseMenuPanel.addKeyHandler();
     }
 
-    public void viewGame(){
-        GamePanel gamePanel = null;
-        try {
-            gamePanel = new GamePanel(this);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public MiniGamePanel getMiniGamePanel(){
+        return miniGamePanel;
+    }
+
+    public void createWave(){
+        gameEngine.createWave();
+    }
+
+    public int getWave(){
+        return gameEngine.getWave();
+    }
+
+    public void nextWave(){
+        gameEngine.nextWave();
+    }
+    public void viewGame( boolean resumed){
+        if ( resumed){
+            gamePanel.startAnimations();
+            mainStage.setScene( gameScene);
         }
-        mainPane.getChildren().clear();
-        mainPane.getChildren().add( gamePanel);
-        sGamePanel = gamePanel;
+        else {
+            try {
+                gamePanel = new GamePanel(this);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            miniGamePanel = new MiniGamePanel(this);
+            gamePanelGroup = new GamePanelGroup(this);
+
+            gameScene = new Scene(gamePanelGroup, 800, 600);
+            mainStage.setScene( gameScene);
+        }
+        gamePanel.addHandler();
     }
 
     public void viewEnemies(){
@@ -81,27 +197,43 @@ public class ScreenManager {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        mainPane.getChildren().clear();
-        mainPane.getChildren().add( enemiesPanel);
+        Scene newScene = new Scene( enemiesPanel, 800, 600);
+        mainStage.setScene( newScene);
+    }
+    public void viewGameOver(int currentScore){
+        GameOverPanel gameOverPanel = new GameOverPanel(this, currentScore);
+        Scene newScene = new Scene( gameOverPanel, 800, 600);
+        mainStage.setScene( newScene);
+        gameOverPanel.addKeyHandler();
     }
 
-    public void viewHelp(){
-
+    public void viewHelp( boolean mainHelp){
+        HelpMenuPanel helpMenuPanel = new HelpMenuPanel( this, mainHelp);
+        Scene newScene = new Scene( helpMenuPanel, 800, 600);
+        mainStage.setScene( newScene);
     }
 
     public void viewHighScores(){
-
+        HighScoresPanel highScoresPanel = null;
+        try {
+            String scoresLabel = gameEngine.getHighScoreManager().getLabel();
+            highScoresPanel = new HighScoresPanel(this);
+            highScoresPanel.setScores(scoresLabel);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Scene newScene = new Scene( highScoresPanel, 800, 600);
+        mainStage.setScene( newScene);
     }
 
-    public void viewMiniMap(){
 
+    public int getShipLives(){
+        return gameEngine.getShipLives();
+    }
+    public int getBombNo(){
+        return gameEngine.getBombNo();
     }
 
-    public GameEngine getGameEngine() {
-        return gameEngine;
-    }
-
-    public void changeTheme(){
-        sGamePanel.changeTheme();
-    }
+    public void decreaseLives(){ gameEngine.decreaseLives(); }
+    public void decreaseBombNo(){ gameEngine.decreaseBombNo(); }
 }

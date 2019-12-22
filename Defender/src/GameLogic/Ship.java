@@ -1,31 +1,14 @@
 package GameLogic;
 
-import javafx.scene.image.Image;
-
-public class Ship {
-    private String name;
-    private Image sprite;
-    private int posX, posY;
-
-    public Ship ( String shipName, int x, int y){
-        name = shipName;
-        sprite = new Image("GUI/resources/shipSprite.png", 50, 50, false, true);
-        posX = x;
-        posY = y;
+public class Ship extends GameCharacter{
+    public Ship ( int id, int x, int y){
+        super( id, x, y, "GUI/resources/shipSprite.png", 100, 30);
+        this.setVeloXMult(2);
+        this.setVeloYMult(2);
     }
 
-    public void move( int x, int y){
-        posX = posX + x;
-        posY = posY + y;
-    }
-    public int getPosX(){
-        return posX;
-    }
-
-    public int getPosY(){
-        return posY;
-    }
-    public Image getSprite(){
-        return sprite;
+    public void move( int x, int y) {
+        this.setPosX( this.getPosX() + 10 * x * this.getVeloXMult());
+        this.setPosY( this.getPosY() + 10 * y * this.getVeloYMult());
     }
 }
