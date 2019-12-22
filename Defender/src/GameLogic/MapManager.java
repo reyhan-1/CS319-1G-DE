@@ -101,7 +101,16 @@ public class MapManager {
 
     public void createWave(){
         for ( int i = 0; i < waveNo * 3; i++) {
-            addEnemy( 0, (int)(Math.random()*2800), (int)(Math.random()*500));
+            if(i <= 4) {
+                addEnemy(0, (int) (Math.random() * 2800), (int) (Math.random() * 500));
+            }
+            else if (i <= 7){
+                addEnemy(1, (int) (Math.random() * 2800), (int) (Math.random() * 500));
+            }
+            else{
+                addEnemy(0, (int) (Math.random() * 2800), (int) (Math.random() * 500));
+                addEnemy(1, (int) (Math.random() * 2800), (int) (Math.random() * 500));
+            }
         }
     }
 
@@ -126,7 +135,13 @@ public class MapManager {
     }
 
     public Enemy addEnemy(int id, int x, int y) {
-        Enemy enemy = new Enemy( id, x, y);
+        Enemy enemy = null;
+        if(id == 0){
+            enemy = new Lander( id, x, y);
+        }
+        else if(id == 1){
+            enemy = new Baiter(id, x, y, this.getShip());
+        }
         enemiesList.add( enemy);
         return enemy;
     }

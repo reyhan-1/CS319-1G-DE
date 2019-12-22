@@ -1,4 +1,4 @@
-package GameLogic;
+/*package GameLogic;
 
 import java.util.Random;
 
@@ -78,5 +78,21 @@ public class Enemy extends GameCharacter{
                 }
             }
         }
+    }
+}
+*/
+package GameLogic;
+
+public abstract class Enemy extends GameCharacter{
+    private int points;
+    public Enemy ( int id, int x, int y, String imageUrl, int points){
+        super( id, x, y, imageUrl, 20, 20);
+        this.points = points;
+    }
+
+    abstract public void move ();
+
+    public int getPoints() {
+        return points;
     }
 }

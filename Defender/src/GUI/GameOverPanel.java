@@ -72,14 +72,12 @@ public class GameOverPanel extends Pane {
     public void addKeyHandler(){
         screenManager.getMainScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                if ( username.getLength() > 0) {
-                    screenManager.getGameEngine().getHighScoreManager().addScore(initials, currScore);
-                    // add high score with initials and score variables
-                    screenManager.getGamePanel().stopAnimations();
-                    screenManager.getGamePanel().removeKeyHandler();
-                    screenManager.getGameEngine().setMapManager( new MapManager());
-                    screenManager.viewHighScores();
-                }
+                screenManager.getGameEngine().getHighScoreManager().addScore(initials, currScore);
+                // add high score with initials and score variables
+                screenManager.getGamePanel().stopAnimations();
+                screenManager.getGamePanel().removeKeyHandler();
+                screenManager.getGameEngine().setMapManager( new MapManager());
+                screenManager.viewHighScores();
             }
         });
     }

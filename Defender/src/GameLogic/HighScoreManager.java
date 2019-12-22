@@ -57,6 +57,7 @@ public class HighScoreManager {
     private String setScoresLabel(){
         String scoresLabel = "Rank\tName\tScore\n";
         for( int i = 0; i < scores.size(); i++){
+            if( i < 10)
             scoresLabel = scoresLabel + (i+1) + "\t\t" + names.get(i) + "\t\t" + scores.get(i) + "\n";
         }
         return scoresLabel;

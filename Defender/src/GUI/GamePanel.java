@@ -73,7 +73,7 @@ public class GamePanel extends Pane {
             public void handle(long now) {
                 // this part is experimental
                 // moves enemies up and down at different speeds
-                if ( now - time > 10_000_000){
+                if ( now - time > 1_000_000){
                     for ( int i = 0; i < screenManager.getEnemiesList().size(); i++)
                     {
                         Enemy enemy = screenManager.getEnemiesList().get( i);
@@ -95,10 +95,9 @@ public class GamePanel extends Pane {
                         else{
                             enemy.move( 0, (-2)*(i + 1));
                         }*/
-                        enemy.followShip( ship);
+                        enemy.move();
                         enemy.getImageView().setLayoutX( enemy.getPosX() - backgroundIV.getViewport().getMinX());
                         enemy.getImageView().setLayoutY( enemy.getPosY());
-
                     }
                     time = now;
                     screenManager.updateMiniEnemyCoords();
@@ -114,7 +113,7 @@ public class GamePanel extends Pane {
                     // for each bullet in bullets list
                     Bullet bullet = screenManager.getBulletsListS().get(i);
                     // move the bullet behind the scenes
-                    bullet.move(bullet.getDirection() * 10, 0);
+                    bullet.move();
                     bullet.getImageView().setLayoutX( bullet.getPosX()- backgroundIV.getViewport().getMinX());
                     bullet.getImageView().setLayoutY( bullet.getPosY());
                     // if the bullet is beyond the map, remove it from the list and the GamePanel
@@ -147,8 +146,9 @@ public class GamePanel extends Pane {
                     toDestroyList.add( toDestroy1.get( i));
                     // only half of these iterations will mean an enemy is destroyed,
                     // other half is for destroyed bullets.
-                    if ( i % 2 == 0) {
-                        screenManager.addScore(10);
+                    if ( toDestroy1.get(i) instanceof Enemy) {
+                        Enemy destroyed = (Enemy)(toDestroy1.get(i));
+                        screenManager.addScore(destroyed.getPoints());
                         screenManager.updateMiniScore();
                     }
                 }
@@ -168,6 +168,10 @@ public class GamePanel extends Pane {
                             screenManager.viewGameOver(screenManager.getScore());
                         } else {
                             ship = screenManager.addShip(0, 200, 250);
+                            for ( int j = 0; j < screenManager.getEnemiesList().size(); j++){
+                                if( screenManager.getEnemiesList().get(j) instanceof Baiter)
+                                ((Baiter) screenManager.getEnemiesList().get( j)).setShip(ship);
+                            }
                             ship.getImageView().setLayoutX( screenManager.getShip().getPosX());
                             ship.getImageView().setLayoutY( screenManager.getShip().getPosY());
                             ship.getImageView().setScaleX( 1);
@@ -209,7 +213,6 @@ public class GamePanel extends Pane {
         keyHandler = new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-
                 // when the ship moves to the right in the gameEngine,
                 // the displayed map image moves as well.
                 // the ship is always able to move,
@@ -218,7 +221,7 @@ public class GamePanel extends Pane {
                     ship.getImageView().setScaleX( 1); // rotates image to the right
                     if ( ship.getPosX() < 3100) {
                         // gameEngine
-                        screenManager.getShip().move(20, 0);
+                        screenManager.getShip().move(1, 0);
                         // anything below is gui-related
                         if ( ship.getPosX() > 400) {
                             if (ship.getPosX() < 2800) {
@@ -252,7 +255,7 @@ public class GamePanel extends Pane {
                 if ( event.getCode() == KeyCode.LEFT){
                     ship.getImageView().setScaleX( -1); // rotates image to the left
                     if ( ship.getPosX() > 0) {
-                        screenManager.getShip().move(-20, 0);
+                        screenManager.getShip().move(-1, 0);
                         if ( ship.getPosX() < 2800) {
                             if (ship.getPosX() > 400) {
                                 Rectangle2D activeMap = new Rectangle2D(ship.getPosX() - 400, 0, 800,
@@ -274,13 +277,13 @@ public class GamePanel extends Pane {
                 }
                 if ( event.getCode() == KeyCode.UP){
                     if ( ship.getPosY() > 10) {
-                        screenManager.getShip().move(0, -10);
+                        screenManager.getShip().move(0, -1);
                         ship.getImageView().setLayoutY(screenManager.getShip().getPosY());
                     }
                 }
                 if ( event.getCode() == KeyCode.DOWN){
                     if ( ship.getPosY() < 470) {
-                        screenManager.getShip().move(0, 10);
+                        screenManager.getShip().move(0, 1);
                         ship.getImageView().setLayoutY(screenManager.getShip().getPosY());
                     }
                 }
