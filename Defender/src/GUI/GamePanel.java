@@ -330,7 +330,7 @@ public class GamePanel extends Pane {
                             getPane().getChildren().remove(e.getImageView());
                             screenManager.getEnemiesList().remove(e);
                             i--;
-                            screenManager.addScore(10);
+                            screenManager.addScore(e.getPoints());
                             screenManager.updateMiniScore();
                         }
                     }
@@ -339,12 +339,10 @@ public class GamePanel extends Pane {
 
                 if ( event.getCode() == KeyCode.K && ship.getPosX()> 500 && ship.getPosX() < 2700){
 
-                    HyperjumpMusic = new SoundManager("/Defender/src/GUI/resources/Hyperjump.wav");
-                    HyperjumpMusic.playSound();
                     int newx = (int)(Math.random() * 2000);
                     int newy = (int)(Math.random() * 200);
 
-                    screenManager.getShip().move(  newx - ship.getPosX(), 0/*Math.abs(ship.getPosY()- newy)*/);
+                    screenManager.getShip().move(  (newx - ship.getPosX())/20, 0/*Math.abs(ship.getPosY()- newy)*/);
 //                    ship.getImageView().setLayoutY(screenManager.getShip().getPosY());
 //                    ship.getImageView().setLayoutX(screenManager.getShip().getPosX());
 
