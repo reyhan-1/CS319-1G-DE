@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class HighScoreManager {
-    private String highScoresPath = System.getProperty("user.dir") + "\\Defender\\src\\Data\\highscores.txt";
+    private String highScoresPath = System.getProperty("user.dir") + "/Defender/src/Data/highscores.txt";
     private File highScores;
     private ArrayList<String> names;
     private ArrayList<Integer> scores;
@@ -75,7 +75,6 @@ public class HighScoreManager {
         sortLists();
         label = setScoresLabel();
         String toWrite = (name + "|" + score + "\n");
-        System.out.println( "array" + toWrite);
         try{
             PrintWriter printWriter = new PrintWriter( new FileWriter( highScores, true));
             printWriter.append(toWrite);

@@ -7,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -17,7 +16,6 @@ public class PauseMenuPanel extends Pane {
     private ScreenManager screenManager;
     private Label pauseLabel;
     private Button helpButton;
-    private ToggleButton themeToggle;
     private Button quitButton;
     private Slider soundSlider;
     private Button continueButton;
@@ -28,7 +26,7 @@ public class PauseMenuPanel extends Pane {
 
         GridPane mainPane = new GridPane();
         GridPane buttons = new GridPane();
-        mainPane.setPrefSize( 300, 200);
+        mainPane.setPrefSize( 400, 200);
         mainPane.setLayoutX( 250);
         mainPane.setLayoutY( 200);
 
@@ -41,15 +39,13 @@ public class PauseMenuPanel extends Pane {
 
 
         helpButton = new Button("Help");
-        themeToggle = new ToggleButton("Change Theme");
         quitButton = new Button("Quit");
         continueButton = new Button("Continue");
         helpButton.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
-        themeToggle.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
         quitButton.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
         continueButton.setStyle( "-fx-background-color: Yellow; -fx-text-fill: Black");
 
-        buttons.addRow( 0, helpButton, themeToggle, quitButton, continueButton);
+        buttons.addRow( 0, helpButton, quitButton, continueButton);
         buttons.setHgap( 10);
         buttons.setVgap( 10);
         buttons.setAlignment( Pos.CENTER);
@@ -64,33 +60,9 @@ public class PauseMenuPanel extends Pane {
 
         this.getChildren().addAll( mainPane, soundSlider);
 
-        nightBackground = screenManager.getGamePanel().isTheme();
-        if ( nightBackground) {
-            this.setBackground(new Background(new BackgroundFill(Color.BLACK,
-                    CornerRadii.EMPTY, Insets.EMPTY)));
-        }
-        else {
-            this.setBackground(new Background(new BackgroundFill(Color.SKYBLUE,
-                    CornerRadii.EMPTY, Insets.EMPTY)));
-        }
+        this.setBackground(new Background(new BackgroundFill(Color.BLACK,
+                CornerRadii.EMPTY, Insets.EMPTY)));
         this.setStyle("-fx-border-color: yellow");
-
-        themeToggle.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                screenManager.changeTheme();
-                if ( nightBackground) {
-                    PauseMenuPanel.this.setBackground(new Background(new BackgroundFill(Color.SKYBLUE,
-                            CornerRadii.EMPTY, Insets.EMPTY)));
-                    nightBackground = false;
-                }
-                else{
-                    PauseMenuPanel.this.setBackground( new Background(new BackgroundFill(Color.BLACK,
-                            CornerRadii.EMPTY, Insets.EMPTY)));
-                    nightBackground = true;
-                }
-            }
-        });
 
         helpButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

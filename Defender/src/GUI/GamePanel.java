@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class GamePanel extends Pane {
     private ScreenManager screenManager;
-    private boolean theme; // true is night, false is day
-    private Image backgroundImageDay, backgroundImageNight;
+    private int theme;
+    private Image backgroundImage1, backgroundImage2, backgroundImage3;
     private ImageView backgroundIV;
     private AnimationTimer collisionAnimator, enemyAnimator, bulletAnimator;
     private EventHandler<KeyEvent> keyHandler;
@@ -30,16 +30,18 @@ public class GamePanel extends Pane {
 
     public GamePanel(ScreenManager sm) throws InterruptedException {
         screenManager = sm;
-        theme = true; // adjust default theme to night
+        theme = 1; // adjust default theme to bg1
         // arrange default background
 
-        backgroundImageNight = new Image("GUI/resources/darkbg.png", 3200,
+        backgroundImage1 = new Image("GUI/resources/darkbg.png", 3200,
                 500, true, true);
-        backgroundImageDay = new Image("GUI/resources/lightbg.png", 3200,
+        backgroundImage2 = new Image("GUI/resources/darkbg2.png", 3200,
+                500, true, true);
+        backgroundImage3 = new Image("GUI/resources/darkbg3.png", 3200,
                 500, true, true);
 
         // imagePortion stands for the displayed 800*600 rectangle on the screen
-        backgroundIV = new ImageView( backgroundImageNight);
+        backgroundIV = new ImageView( backgroundImage1);
         Rectangle2D imagePortion = new Rectangle2D(0, 0, 800, 500);
         // using setViewport, we can change the displayed rectangle
         backgroundIV.setViewport( imagePortion);
@@ -190,6 +192,7 @@ public class GamePanel extends Pane {
                         screenManager.nextWave();
                         screenManager.createWave();
                         drawWave();
+                        changeTheme();
                         screenManager.updateMiniWave();
                     }
                     else{
@@ -373,13 +376,17 @@ public class GamePanel extends Pane {
     }
 
     public void changeTheme(){
-        if (theme == true){
-            backgroundIV.setImage( backgroundImageDay);
-            theme = false;
+        if (theme == 1){
+            backgroundIV.setImage( backgroundImage2);
+            theme = 2;
         }
-        else {
-            backgroundIV.setImage( backgroundImageNight);
-            theme = true;
+        else if ( theme == 2){
+            backgroundIV.setImage( backgroundImage3);
+            theme = 3;
+        }
+        else{
+            backgroundIV.setImage( backgroundImage1);
+            theme = 1;
         }
     }
 
@@ -406,10 +413,6 @@ public class GamePanel extends Pane {
         enemyAnimator.start();
         bulletAnimator.start();
         collisionAnimator.start();
-    }
-
-    public boolean isTheme() {
-        return theme;
     }
 
     public void drawDots( int minX){
